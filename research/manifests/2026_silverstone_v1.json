@@ -1,0 +1,204 @@
+{
+  "manifest_schema_version": "1.0.0",
+  "batch_id": "batch_2026_silverstone_gp_v1",
+  "generated_at_utc": "2026-10-16T19:45:00Z",
+  "target_circuit": "Silverstone Circuit (silverstone_gp)",
+  "target_season": 2026,
+  "verified_official_event": {
+    "event_id": "2026_british_gp",
+    "official_name": "FORMULA 1 PIRELLI BRITISH GRAND PRIX 2026",
+    "round_number": 9,
+    "dates": "2026-07-03 to 2026-07-05",
+    "competition_format": "ALTERNATIVE_FORMAT_SPRINT"
+  },
+  "batch_status": "PARTIAL",
+  "batch_status_Scoped_Track_Event_Mining": "COMPLETE_WITH_DECLARED_UNKNOWNS",
+  "batch_status_explanation": "All required baseline track, surface, event configuration, role mapping, compound catalogue shell, source register, and report deliverables are created and validated against official 2026 FIA, Pirelli, Formula1.com, and Silverstone sources. Marked PARTIAL overall per strict guideline rules because (1) the user's GitHub repository https://github.com/sm9026/F1_Sim.git was inaccessible from the search/browse tools so C++ loader path compatibility is UNVERIFIED, and (2) telemetry-derived sector lengths/speed fractions and calibrated tyre/track model coefficients are intentionally deferred to the separate historical timing/telemetry and calibration task.",
+  "repository_inspection": {
+    "repository_url": "https://github.com/sm9026/F1_Sim.git",
+    "inspection_attempted": true,
+    "inspection_methods_tried": [
+      "google:search for \"sm9026/F1_Sim\" OR \"github.com/sm9026/F1_Sim\" (0 results)",
+      "google:browse on https://github.com/sm9026/F1_Sim (inaccessible / unavailable error)"
+    ],
+    "inspection_status": "UNAVAILABLE",
+    "compatibility_status": "UNVERIFIED",
+    "fallback_path_plan_used": "data/{tracks,events,compounds,reports}/ and data/sources.md per mining_guidlines.md Section 10.3"
+  },
+  "files": [
+    {
+      "relative_path": "data/tracks/silverstone_gp_layout_v2011.json",
+      "status": "CREATED",
+      "schema_name": "TrackLayoutVersion",
+      "schema_version": "1.0.0",
+      "entity_keys": {
+        "track_id": "silverstone_gp",
+        "layout_version": 2011
+      },
+      "purpose": "Static circuit geometry, location, corner counts, pit-lane speed limit, and normalized energy exposure proxies for the 2011-present 5891 m Silverstone Arena GP layout.",
+      "dependencies": [
+        "data/sources.md"
+      ],
+      "validation_status": "PASSED_JSON_SCHEMA_AND_RANGE_CHECKS",
+      "sha256": "fe81dff6400a30dac8dcb8a6419a32ea5e70fad48becfb9ebfba9e9ba3f3b864"
+    },
+    {
+      "relative_path": "data/tracks/silverstone_gp_surface_v2019.json",
+      "status": "CREATED",
+      "schema_name": "TrackSurfaceProfile",
+      "schema_version": "1.0.0",
+      "entity_keys": {
+        "track_id": "silverstone_gp",
+        "layout_version": 2011,
+        "surface_version": 2019
+      },
+      "purpose": "Versioned asphalt surface profile for the August 2019 Dromo/Tarmac resurfacing epoch applicable to the 2026 British Grand Prix, separated from layout geometry.",
+      "dependencies": [
+        "data/tracks/silverstone_gp_layout_v2011.json",
+        "data/sources.md"
+      ],
+      "validation_status": "PASSED_JSON_SCHEMA_AND_RANGE_CHECKS",
+      "sha256": "84025963cee4a8407e3757fef71eaf353b80d61ada4dc9287a10c674bc07ea62"
+    },
+    {
+      "relative_path": "data/events/2026_british_gp_config.json",
+      "status": "CREATED",
+      "schema_name": "EventConfiguration",
+      "schema_version": "1.0.0",
+      "entity_keys": {
+        "event_id": "2026_british_gp",
+        "season_year": 2026
+      },
+      "purpose": "Official 2026 British Grand Prix (03-05 July 2026, Round 9) Sprint-format event configuration, 52-lap distance, C1/C2/C3 nomination, and FIA Section B regulatory constraints.",
+      "dependencies": [
+        "data/tracks/silverstone_gp_layout_v2011.json",
+        "data/tracks/silverstone_gp_surface_v2019.json",
+        "data/compounds/2026_pirelli_slick_catalogue_v1.json",
+        "data/sources.md"
+      ],
+      "validation_status": "PASSED_JSON_SCHEMA_AND_FK_CHECKS",
+      "sha256": "2bad15bf0df53fd9dc5ce84071d8507f83f4db4763f422d5a6ee276801044681"
+    },
+    {
+      "relative_path": "data/events/2026_british_gp_role_mapping.json",
+      "status": "CREATED",
+      "schema_name": "EventRoleMapping",
+      "schema_version": "1.0.0",
+      "entity_keys": {
+        "event_id": "2026_british_gp",
+        "roles": [
+          "HARD",
+          "MEDIUM",
+          "SOFT"
+        ]
+      },
+      "purpose": "Bijective mapping of 2026 British GP event roles {HARD->C1, MEDIUM->C2, SOFT->C3} onto the official nominated three-compound set.",
+      "dependencies": [
+        "data/events/2026_british_gp_config.json",
+        "data/compounds/2026_pirelli_slick_catalogue_v1.json",
+        "data/sources.md"
+      ],
+      "validation_status": "PASSED_BIJECTION_AND_MONOTONICITY_CHECKS",
+      "sha256": "7419b4e6439b821218824b9c9ad8104db42868871962f8474807aaf19d5c1005"
+    },
+    {
+      "relative_path": "data/compounds/2026_pirelli_slick_catalogue_v1.json",
+      "status": "CREATED",
+      "schema_name": "PhysicalCompoundCatalogue",
+      "schema_version": "1.0.0",
+      "entity_keys": {
+        "season_year": 2026,
+        "spec_version": 1,
+        "compounds": [
+          "C1",
+          "C2",
+          "C3",
+          "C4",
+          "C5"
+        ]
+      },
+      "purpose": "Shared 2026 Pirelli P Zero dry slick physical compound catalogue (homologated 15 Dec 2025). Contains verified physical compound identities and hardness ranks; uncalibrated model coefficients are preserved as null (UNKNOWN_UNAVAILABLE) pending the calibration task.",
+      "dependencies": [
+        "data/sources.md"
+      ],
+      "validation_status": "PASSED_JSON_SCHEMA_CHECKS_UNCALIBRATED_SHELL",
+      "sha256": "3157073fa67e4bd1ba574f87d61ded518b279a1f6fbfb7531079f005a9c7da28"
+    },
+    {
+      "relative_path": "data/sources.md",
+      "status": "CREATED",
+      "schema_name": "SourceRegisterMarkdown",
+      "schema_version": "1.0.0",
+      "entity_keys": {
+        "register_scope": "2026_silverstone_batch"
+      },
+      "purpose": "Master provenance register documenting exact URLs, publication/effective dates, retrieval timestamps, derivations, and licensing caveats for all 11 sources.",
+      "dependencies": [],
+      "validation_status": "PASSED_SOURCE_LINK_AND_ID_RESOLUTION",
+      "sha256": "449d4db7380773e6ed0e77c2f7e67403f77a08d22684800109945300b87059cd"
+    },
+    {
+      "relative_path": "data/reports/2026_silverstone_research_and_validation_report.md",
+      "status": "CREATED",
+      "schema_name": "MiningResearchAndValidationReport",
+      "schema_version": "1.0.0",
+      "entity_keys": {
+        "report_id": "2026_silverstone_mining_report"
+      },
+      "purpose": "Comprehensive research, data-status, conflict-resolution, missing-data, and validation report for the 2026 Silverstone dataset batch.",
+      "dependencies": [
+        "data/sources.md"
+      ],
+      "validation_status": "PASSED_COMPLETENESS_CHECK",
+      "sha256": "b40adcd13f963033a5a9326158bd5c695dfbe88b231b5128d655db420698c840"
+    }
+  ],
+  "unresolved_gaps_and_blockers": [
+    {
+      "field_or_item": "C++ Repository Schema & Loader Verification (https://github.com/sm9026/F1_Sim.git)",
+      "status": "UNVERIFIED",
+      "blocks_simulation": false,
+      "impact_and_next_step": "JSON files strictly follow f1_simulator_mathematical_framework.md Section 4 field names and types; verify directory paths and struct field bindings when local repository is available."
+    },
+    {
+      "field_or_item": "TrackLayoutVersion.sector1_length_m, sector2_length_m, sector3_length_m",
+      "status": "UNKNOWN_UNAVAILABLE",
+      "blocks_simulation": false,
+      "impact_and_next_step": "Stored as null with missing_policy DEGRADE_TO_LOWER_STAGE. Full-lap model (Stages M0-M2) runs using verified lap_length_m = 5891.0 m. Extract from FastF1 telemetry distance channel in the next task."
+    },
+    {
+      "field_or_item": "TrackLayoutVersion.frac_lap_straight, frac_lap_corner_slow, frac_lap_corner_med, frac_lap_corner_high",
+      "status": "UNKNOWN_UNAVAILABLE",
+      "blocks_simulation": false,
+      "impact_and_next_step": "Stored as null with missing_policy DEGRADE_TO_LOWER_STAGE. Extract from 2026 British GP FastF1 speed telemetry in the next task."
+    },
+    {
+      "field_or_item": "TrackSurfaceProfile.bumpiness_index_score",
+      "status": "UNKNOWN_UNAVAILABLE",
+      "blocks_simulation": false,
+      "impact_and_next_step": "Stored as null with missing_policy USE_DECLARED_DEFAULT (descriptive only in Stages M0-M2)."
+    },
+    {
+      "field_or_item": "TrackLayoutVersion.pit_lane_length_m",
+      "status": "ESTIMATED",
+      "blocks_simulation": false,
+      "impact_and_next_step": "Secondary source estimate (457.0 m, confidence LOW) stored to satisfy non-null DOUBLE schema requirement; simulator uses calibrated net pit loss P_ref (~20.0 s) in Eq. (9.1). Verify against FIA British GP Event Notes Doc 7 or telemetry in the next task."
+    },
+    {
+      "field_or_item": "PhysicalCompoundCatalogue calibrated parameters (pace_offset_ref_s for C1/C2/C4/C5, base_wear_rate_per_lap, linear_deg_coeff_s) and CalibratedModelParameters",
+      "status": "UNKNOWN_UNAVAILABLE",
+      "blocks_simulation": true,
+      "impact_and_next_step": "Intentionally deferred per SCOPE LIMIT ('do NOT calibrate model parameters'). Blocks empirical lap-time prediction until the next task (historical timing/telemetry collection and model calibration) populates CalibratedModelParameters and compound wear/pace fits."
+    }
+  ],
+  "validation_summary": {
+    "json_syntax_parse_check": "PASSED (all JSON files parsed cleanly via Python json.loads)",
+    "schema_keys_and_types_check": "PASSED",
+    "numeric_ranges_and_units_check": "PASSED (lap_length_m=5891.0, race_distance_laps=52, corners=8L+10R=18, pit_speed_limit_kmh=80.0)",
+    "cross_file_foreign_key_check": "PASSED (track_id='silverstone_gp', layout_version=2011, surface_version=2019, event_id='2026_british_gp', season_year=2026)",
+    "event_role_mapping_bijection_check": "PASSED ({HARD:C1, MEDIUM:C2, SOFT:C3} bijective onto ['C1','C2','C3'] with hardness ranks 1 < 2 < 3)",
+    "layout_surface_separation_check": "PASSED (separate TrackLayoutVersion and TrackSurfaceProfile files)",
+    "no_silent_zero_imputation_check": "PASSED (all unknown fields are null or explicitly flagged ASSUMED)",
+    "cpp_repo_loader_compile_check": "NOT RUN (repository URL inaccessible)"
+  }
+}

@@ -1,0 +1,51 @@
+{
+  "schema_name": "EventRoleMapping",
+  "schema_version": "1.0.0",
+  "event_id": "2026_british_gp",
+  "season_year": 2026,
+  "spec_version": 1,
+  "is_hypothetical_override": false,
+  "nominated_compounds_set": [
+    "C1",
+    "C2",
+    "C3"
+  ],
+  "mappings": [
+    {
+      "event_id": "2026_british_gp",
+      "role_id": "HARD",
+      "compound_id": "C1",
+      "sidewall_colour": "WHITE",
+      "hardness_rank": 1
+    },
+    {
+      "event_id": "2026_british_gp",
+      "role_id": "MEDIUM",
+      "compound_id": "C2",
+      "sidewall_colour": "YELLOW",
+      "hardness_rank": 2
+    },
+    {
+      "event_id": "2026_british_gp",
+      "role_id": "SOFT",
+      "compound_id": "C3",
+      "sidewall_colour": "RED",
+      "hardness_rank": 3
+    }
+  ],
+  "provenance": {
+    "source_id": "SRC_F1_2026_GB_TYRES_ARTICLE",
+    "source_status": "PUBLISHED_OBSERVED",
+    "source_name": "Formula1.com_And_Pirelli_2026_British_GP_Tyre_Nomination",
+    "source_ref_uri": "https://www.formula1.com/en/latest/article/what-tyres-will-the-teams-and-drivers-have-for-the-2026-british-grand-prix.3qD9d5o8X4x3se0F7Zg5i1",
+    "retrieved_at_utc": "2026-10-16T19:45:00Z",
+    "valid_from_date": "2026-06-10",
+    "valid_to_date": "2026-07-05",
+    "derivation_method": "Exact bijection between {HARD, MEDIUM, SOFT} and nominated subset {C1, C2, C3} with strict hardness rank ordering 1 < 2 < 3.",
+    "uncertainty_std": 0.0,
+    "ci_lower_95": null,
+    "ci_upper_95": null,
+    "confidence_tier": "HIGH",
+    "missing_policy": "REJECT_SIMULATION"
+  }
+}

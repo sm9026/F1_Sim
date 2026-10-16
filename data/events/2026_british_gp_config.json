@@ -1,0 +1,85 @@
+{
+  "schema_name": "EventConfiguration",
+  "schema_version": "1.0.0",
+  "event_id": "2026_british_gp",
+  "official_event_name": "FORMULA 1 PIRELLI BRITISH GRAND PRIX 2026",
+  "round_number": 9,
+  "event_dates": {
+    "fp1_and_sprint_qualifying_date": "2026-07-03",
+    "sprint_and_qualifying_date": "2026-07-04",
+    "race_date": "2026-07-05"
+  },
+  "competition_format": "ALTERNATIVE_FORMAT_SPRINT",
+  "season_year": 2026,
+  "track_id": "silverstone_gp",
+  "layout_version": 2011,
+  "surface_version": 2019,
+  "race_distance_laps": 52,
+  "scheduled_race_distance_km": 306.198,
+  "nominated_compounds_set": [
+    "C1",
+    "C2",
+    "C3"
+  ],
+  "is_hypothetical_override": false,
+  "min_distinct_dry_compounds": 2,
+  "min_pit_stops": 1,
+  "max_pit_stops": 4,
+  "min_stint_length_laps": 1,
+  "max_stint_length_laps": null,
+  "available_sets_hard": 2,
+  "available_sets_med": 4,
+  "available_sets_soft": 6,
+  "typical_pre_race_sunday_remaining_sets_note": "For the top-7 qualifiers at the 2026 British GP (Antonelli, Leclerc, Hamilton, Russell, Norris, Piastri, Lindblad), Pirelli reported 1 new Hard (C1), 1 new Medium (C2), and 3 used Softs (C3) remaining for Sunday's race after FP1, Sprint Qualifying, Sprint (17 laps), and Qualifying.",
+  "governing_regulations": {
+    "sporting_regulations_doc": "FIA 2026 F1 Regulations - Section B [Sporting] - Iss 07 - 2026-06-25 (verified against full text of Iss 05 - 2026-02-27, Articles B1.6.3a, B6.1.1, B6.2.4, B6.3.4, B6.3.6, B6.3.9)",
+    "technical_regulations_doc": "FIA 2026 F1 Regulations - Section C [Technical] - Iss 19 - 2026-06-25"
+  },
+  "field_provenance": {
+    "event_identity_and_laps": {
+      "source_id": "SRC_F1_2026_GB_RACE_RESULT",
+      "source_status": "PUBLISHED_OBSERVED",
+      "source_name": "Formula1.com_Official_2026_British_GP_Race_Result",
+      "source_ref_uri": "https://www.formula1.com/en/results/2026/races/1289/great-britain/race-result",
+      "retrieved_at_utc": "2026-10-16T19:45:00Z",
+      "valid_from_date": "2026-07-03",
+      "valid_to_date": "2026-07-05",
+      "derivation_method": "Official race classification: 52 laps (306.198 km) held 03-05 July 2026 at Silverstone Circuit.",
+      "uncertainty_std": 0.0,
+      "ci_lower_95": 52.0,
+      "ci_upper_95": 52.0,
+      "confidence_tier": "HIGH",
+      "missing_policy": "REJECT_SIMULATION"
+    },
+    "nominated_compounds_set": {
+      "source_id": "SRC_PIRELLI_AT_GB_NOMINATIONS_2026",
+      "source_status": "PUBLISHED_OBSERVED",
+      "source_name": "Pirelli_Official_2026_Silverstone_Compound_Nomination",
+      "source_ref_uri": "https://press.pirelli.com/the-full-pirelli-range-for-spielberg-and-silverstone/",
+      "retrieved_at_utc": "2026-10-16T19:45:00Z",
+      "valid_from_date": "2026-06-10",
+      "valid_to_date": "2026-07-05",
+      "derivation_method": "Published 10 June 2026 and re-confirmed 30 June 2026: C1 (Hard), C2 (Medium), C3 (Soft).",
+      "uncertainty_std": null,
+      "ci_lower_95": null,
+      "ci_upper_95": null,
+      "confidence_tier": "HIGH",
+      "missing_policy": "REJECT_SIMULATION"
+    },
+    "regulatory_constraints_and_tyre_allocation": {
+      "source_id": "SRC_FIA_2026_SPORTING_B_ISS05",
+      "source_status": "PUBLISHED_OBSERVED",
+      "source_name": "FIA_2026_Section_B_Sporting_Regulations_Art_B6_2_4_And_B6_3_6",
+      "source_ref_uri": "https://www.fia.com/system/files/documents/fia_2026_f1_regulations_-_section_b_sporting_-_iss_05_-_2026-02-27.pdf",
+      "retrieved_at_utc": "2026-10-16T19:45:00Z",
+      "valid_from_date": "2026-02-27",
+      "valid_to_date": null,
+      "derivation_method": "Art. B6.3.6 mandates at least 2 different dry-weather specifications (min_distinct_dry_compounds = 2, implying min_pit_stops = 1 in a dry race). Art. B6.2.4 Table specifies Alternative Format (Sprint) allocation of 12 dry sets: 2 Hard, 4 Medium, 6 Soft (corroborated by Formula1.com 01 July 2026 tyre allocation article). max_pit_stops = 4 and min_stint_length_laps = 1 are declared simulator search bounds.",
+      "uncertainty_std": 0.0,
+      "ci_lower_95": null,
+      "ci_upper_95": null,
+      "confidence_tier": "HIGH",
+      "missing_policy": "USE_DECLARED_DEFAULT"
+    }
+  }
+}
