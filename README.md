@@ -142,6 +142,6 @@ Suggested development order:
 
 Keep code, runtime datasets, research evidence, and model documentation separate. Data changes should be traceable, validated, and reviewed. Do not treat assumed or illustrative framework values as official Pirelli measurements or calibrated simulator coefficients.
 
-## License
+
 
 
