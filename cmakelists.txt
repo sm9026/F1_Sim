@@ -1,0 +1,44 @@
+cmake_minimum_required(VERSION 3.16)
+project(F1_Sim LANGUAGES CXX)
+
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_CXX_EXTENSIONS OFF)
+
+add_library(f1_sim_dal STATIC
+    src/data_access/json_parser.cpp
+    src/data_access/dataset_resolver.cpp
+    src/data_access/data_access_layer.cpp
+)
+
+target_include_directories(f1_sim_dal
+    PUBLIC
+        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+    PRIVATE
+        ${CMAKE_CURRENT_SOURCE_DIR}/src/data_access
+)
+
+if(MSVC)
+    target_compile_options(f1_sim_dal PRIVATE /W4)
+else()
+    target_compile_options(f1_sim_dal PRIVATE -Wall -Wextra -Wpedantic)
+endif()
+
+enable_testing()
+
+add_executable(f1_sim_dal_tests
+    tests/data_access/dal_tests.cpp
+)
+
+target_link_libraries(f1_sim_dal_tests PRIVATE f1_sim_dal)
+
+if(MSVC)
+    target_compile_options(f1_sim_dal_tests PRIVATE /W4)
+else()
+    target_compile_options(f1_sim_dal_tests PRIVATE -Wall -Wextra -Wpedantic)
+endif()
+
+add_test(
+    NAME f1_sim_dal_tests
+    COMMAND f1_sim_dal_tests "${CMAKE_CURRENT_SOURCE_DIR}/data"
+)
