@@ -23,7 +23,7 @@
     ],
     "inspection_status": "UNAVAILABLE",
     "compatibility_status": "UNVERIFIED",
-    "fallback_path_plan_used": "data/{tracks,events,compounds,reports}/ and data/sources.md per mining_guidlines.md Section 10.3"
+    "fallback_path_plan_used": "data/{tracks,events,compounds}/ plus research/{sources,reports}/ per mining_guidlines.md Section 10.3"
   },
   "files": [
     {
@@ -37,7 +37,7 @@
       },
       "purpose": "Static circuit geometry, location, corner counts, pit-lane speed limit, and normalized energy exposure proxies for the 2011-present 5891 m Silverstone Arena GP layout.",
       "dependencies": [
-        "data/sources.md"
+        "research/sources/sources.md"
       ],
       "validation_status": "PASSED_JSON_SCHEMA_AND_RANGE_CHECKS",
       "sha256": "fe81dff6400a30dac8dcb8a6419a32ea5e70fad48becfb9ebfba9e9ba3f3b864"
@@ -55,7 +55,7 @@
       "purpose": "Versioned asphalt surface profile for the August 2019 Dromo/Tarmac resurfacing epoch applicable to the 2026 British Grand Prix, separated from layout geometry.",
       "dependencies": [
         "data/tracks/silverstone_gp_layout_v2011.json",
-        "data/sources.md"
+        "research/sources/sources.md"
       ],
       "validation_status": "PASSED_JSON_SCHEMA_AND_RANGE_CHECKS",
       "sha256": "84025963cee4a8407e3757fef71eaf353b80d61ada4dc9287a10c674bc07ea62"
@@ -74,7 +74,7 @@
         "data/tracks/silverstone_gp_layout_v2011.json",
         "data/tracks/silverstone_gp_surface_v2019.json",
         "data/compounds/2026_pirelli_slick_catalogue_v1.json",
-        "data/sources.md"
+        "research/sources/sources.md"
       ],
       "validation_status": "PASSED_JSON_SCHEMA_AND_FK_CHECKS",
       "sha256": "2bad15bf0df53fd9dc5ce84071d8507f83f4db4763f422d5a6ee276801044681"
@@ -96,7 +96,7 @@
       "dependencies": [
         "data/events/2026_british_gp_config.json",
         "data/compounds/2026_pirelli_slick_catalogue_v1.json",
-        "data/sources.md"
+        "research/sources/sources.md"
       ],
       "validation_status": "PASSED_BIJECTION_AND_MONOTONICITY_CHECKS",
       "sha256": "7419b4e6439b821218824b9c9ad8104db42868871962f8474807aaf19d5c1005"
@@ -119,13 +119,13 @@
       },
       "purpose": "Shared 2026 Pirelli P Zero dry slick physical compound catalogue (homologated 15 Dec 2025). Contains verified physical compound identities and hardness ranks; uncalibrated model coefficients are preserved as null (UNKNOWN_UNAVAILABLE) pending the calibration task.",
       "dependencies": [
-        "data/sources.md"
+        "research/sources/sources.md"
       ],
       "validation_status": "PASSED_JSON_SCHEMA_CHECKS_UNCALIBRATED_SHELL",
       "sha256": "3157073fa67e4bd1ba574f87d61ded518b279a1f6fbfb7531079f005a9c7da28"
     },
     {
-      "relative_path": "data/sources.md",
+      "relative_path": "research/sources/sources.md",
       "status": "CREATED",
       "schema_name": "SourceRegisterMarkdown",
       "schema_version": "1.0.0",
@@ -138,7 +138,7 @@
       "sha256": "449d4db7380773e6ed0e77c2f7e67403f77a08d22684800109945300b87059cd"
     },
     {
-      "relative_path": "data/reports/2026_silverstone_research_and_validation_report.md",
+      "relative_path": "research/reports/2026_silverstone_research_and_validation_report.md",
       "status": "CREATED",
       "schema_name": "MiningResearchAndValidationReport",
       "schema_version": "1.0.0",
@@ -147,7 +147,7 @@
       },
       "purpose": "Comprehensive research, data-status, conflict-resolution, missing-data, and validation report for the 2026 Silverstone dataset batch.",
       "dependencies": [
-        "data/sources.md"
+        "research/sources/sources.md"
       ],
       "validation_status": "PASSED_COMPLETENESS_CHECK",
       "sha256": "b40adcd13f963033a5a9326158bd5c695dfbe88b231b5128d655db420698c840"
