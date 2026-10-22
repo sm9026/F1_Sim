@@ -6,6 +6,7 @@ INCLUDES := -Iinclude -Isrc/data_access
 BUILD_DIR := build
 DAL_LIB := $(BUILD_DIR)/libf1_sim_dal.a
 SIM_LIB := $(BUILD_DIR)/libf1_sim_engine.a
+APP_BIN := $(BUILD_DIR)/f1_sim
 DAL_TEST_BIN := $(BUILD_DIR)/dal_tests
 SIM_TEST_BIN := $(BUILD_DIR)/simulation_tests
 
@@ -20,9 +21,9 @@ SIM_OBJS := \
 	$(BUILD_DIR)/strategy_validator.o \
 	$(BUILD_DIR)/race_session.o
 
-.PHONY: all test clean
+.PHONY: all test run clean
 
-all: $(DAL_LIB) $(SIM_LIB) $(DAL_TEST_BIN) $(SIM_TEST_BIN)
+all: $(DAL_LIB) $(SIM_LIB) $(APP_BIN) $(DAL_TEST_BIN) $(SIM_TEST_BIN)
 
 $(BUILD_DIR):
 	mkdir -p $(BUILD_DIR)
@@ -54,11 +55,17 @@ $(DAL_LIB): $(DAL_OBJS)
 $(SIM_LIB): $(SIM_OBJS)
 	$(AR) rcs $@ $^
 
+$(APP_BIN): src/main.cpp $(SIM_LIB) $(DAL_LIB)
+	$(CXX) $(CXXFLAGS) -Iinclude $< $(SIM_LIB) $(DAL_LIB) -o $@
+
 $(DAL_TEST_BIN): tests/data_access/dal_tests.cpp $(DAL_LIB)
 	$(CXX) $(CXXFLAGS) $(INCLUDES) $< $(DAL_LIB) -o $@
 
 $(SIM_TEST_BIN): tests/simulation/simulation_tests.cpp $(SIM_LIB) $(DAL_LIB)
 	$(CXX) $(CXXFLAGS) $(INCLUDES) $< $(SIM_LIB) $(DAL_LIB) -o $@
+
+run: $(APP_BIN)
+	./$(APP_BIN) --data-root data
 
 test: $(DAL_TEST_BIN) $(SIM_TEST_BIN)
 	./$(DAL_TEST_BIN) data

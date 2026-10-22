@@ -32,12 +32,20 @@ target_include_directories(f1_sim_engine
 
 target_link_libraries(f1_sim_engine PUBLIC f1_sim_dal)
 
+add_executable(f1_sim
+    src/main.cpp
+)
+
+target_link_libraries(f1_sim PRIVATE f1_sim_engine f1_sim_dal)
+
 if(MSVC)
     target_compile_options(f1_sim_dal PRIVATE /W4)
     target_compile_options(f1_sim_engine PRIVATE /W4)
+    target_compile_options(f1_sim PRIVATE /W4)
 else()
     target_compile_options(f1_sim_dal PRIVATE -Wall -Wextra -Wpedantic)
     target_compile_options(f1_sim_engine PRIVATE -Wall -Wextra -Wpedantic)
+    target_compile_options(f1_sim PRIVATE -Wall -Wextra -Wpedantic)
 endif()
 
 enable_testing()
