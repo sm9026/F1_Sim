@@ -60,6 +60,10 @@ add_executable(f1_sim_simulation_tests
     tests/simulation/simulation_tests.cpp
 )
 
+target_include_directories(f1_sim_simulation_tests PRIVATE
+    ${CMAKE_CURRENT_SOURCE_DIR}/src
+)
+
 target_link_libraries(f1_sim_simulation_tests PRIVATE f1_sim_engine f1_sim_dal)
 
 if(MSVC)

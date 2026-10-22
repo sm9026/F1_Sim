@@ -5,10 +5,13 @@
 #include "f1_sim/data_access/diagnostic.hpp"
 #include "f1_sim/data_access/domain_models.hpp"
 
+#include <algorithm>
 #include <filesystem>
 #include <memory>
 #include <optional>
 #include <string>
+#include <system_error>
+#include <vector>
 
 namespace f1_sim {
 namespace data_access {
@@ -42,6 +45,82 @@ public:
     explicit DataAccessLayer(
         std::filesystem::path data_root,
         std::shared_ptr<DiagnosticSink> diagnostic_sink = std::make_shared<InMemoryDiagnosticCollector>());
+
+    /**
+     * @brief Discover all candidate event_id values present under `data_root/events/`
+     *        in deterministic lexicographical order without exposing raw filesystem
+     *        or JSON parsing details to the caller.
+     */
+    Result<std::vector<std::string>> listAvailableEventIds() const {
+        if (!resolver_.isRootValid()) {
+            std::vector<Diagnostic> diags{
+                resolver_.rootError().value_or(Diagnostic{
+                    Severity::Error,
+                    DiagnosticCode::DatasetFileNotFound,
+                    "Configured data_root is invalid.",
+                    "events",
+                    "",
+                    "",
+                    "Valid data_root directory",
+                    "invalid"
+                })};
+            emitDiagnostics(diags);
+            return Result<std::vector<std::string>>::failure(
+                LoadStatus::FileNotFound, std::move(diags));
+        }
+
+        std::error_code ec;
+        const std::filesystem::path events_dir = resolver_.canonicalRoot() / "events";
+        if (!std::filesystem::exists(events_dir, ec) || ec ||
+            !std::filesystem::is_directory(events_dir, ec) || ec) {
+            std::vector<Diagnostic> diags{Diagnostic{
+                Severity::Error,
+                DiagnosticCode::DatasetFileNotFound,
+                "Runtime 'events/' subdirectory does not exist under configured data_root.",
+                "events",
+                "events",
+                "",
+                "Existing 'events/' directory",
+                "missing"
+            }};
+            emitDiagnostics(diags);
+            return Result<std::vector<std::string>>::failure(
+                LoadStatus::FileNotFound, std::move(diags));
+        }
+
+        const std::string suffix = "_config.json";
+        std::vector<std::string> event_ids;
+
+        for (const auto& entry : std::filesystem::directory_iterator(events_dir, ec)) {
+            if (ec) {
+                break;
+            }
+            std::error_code file_ec;
+            if (!entry.is_regular_file(file_ec) || file_ec) {
+                continue;
+            }
+            const std::string fname = entry.path().filename().generic_string();
+            if (fname.size() <= suffix.size()) {
+                continue;
+            }
+            if (fname.compare(fname.size() - suffix.size(), suffix.size(), suffix) != 0) {
+                continue;
+            }
+            const std::string candidate_id = fname.substr(0, fname.size() - suffix.size());
+            if (!DatasetResolver::validateIdentifier(candidate_id, "event_id", candidate_id).ok()) {
+                continue;
+            }
+            auto conf_res = resolver_.verifyRelativePathUnderRoot(
+                std::filesystem::path("events") / fname, candidate_id);
+            if (conf_res.ok()) {
+                event_ids.push_back(candidate_id);
+            }
+        }
+
+        std::sort(event_ids.begin(), event_ids.end());
+        event_ids.erase(std::unique(event_ids.begin(), event_ids.end()), event_ids.end());
+        return Result<std::vector<std::string>>::success(std::move(event_ids));
+    }
 
     /**
      * @brief Load and cross-validate a complete, immutable EventBundle for `event_id`.

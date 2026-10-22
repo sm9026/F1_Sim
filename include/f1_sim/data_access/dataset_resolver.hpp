@@ -3,8 +3,11 @@
 
 #include "f1_sim/data_access/diagnostic.hpp"
 
+#include <algorithm>
 #include <filesystem>
 #include <string>
+#include <system_error>
+#include <vector>
 
 namespace f1_sim {
 namespace data_access {
@@ -69,6 +72,79 @@ public:
         int season_year,
         int spec_version,
         const std::string& catalogue_slug = "pirelli_slick") const;
+
+    /**
+     * @brief Discover all candidate event_id values present under `data_root/events/`
+     *        (matching `events/{event_id}_config.json` with a valid identifier and confined path),
+     *        returned in deterministic sorted order.
+     */
+    Result<std::vector<std::string>> listAvailableEventIds() const {
+        if (!root_valid_) {
+            return Result<std::vector<std::string>>::failure(
+                LoadStatus::FileNotFound,
+                {root_error_.value_or(Diagnostic{
+                    Severity::Error,
+                    DiagnosticCode::DatasetFileNotFound,
+                    "Configured data_root is invalid.",
+                    "events",
+                    "",
+                    "",
+                    "Valid data_root directory",
+                    "invalid"
+                })});
+        }
+
+        std::error_code ec;
+        const std::filesystem::path events_dir = canonical_root_ / "events";
+        if (!std::filesystem::exists(events_dir, ec) || ec ||
+            !std::filesystem::is_directory(events_dir, ec) || ec) {
+            return Result<std::vector<std::string>>::failure(
+                LoadStatus::FileNotFound,
+                {Diagnostic{
+                    Severity::Error,
+                    DiagnosticCode::DatasetFileNotFound,
+                    "Runtime 'events/' subdirectory does not exist under configured data_root.",
+                    "events",
+                    "events",
+                    "",
+                    "Existing 'events/' directory",
+                    "missing"
+                }});
+        }
+
+        const std::string suffix = "_config.json";
+        std::vector<std::string> event_ids;
+
+        for (const auto& entry : std::filesystem::directory_iterator(events_dir, ec)) {
+            if (ec) {
+                break;
+            }
+            std::error_code file_ec;
+            if (!entry.is_regular_file(file_ec) || file_ec) {
+                continue;
+            }
+            const std::string fname = entry.path().filename().generic_string();
+            if (fname.size() <= suffix.size()) {
+                continue;
+            }
+            if (fname.compare(fname.size() - suffix.size(), suffix.size(), suffix) != 0) {
+                continue;
+            }
+            const std::string candidate_id = fname.substr(0, fname.size() - suffix.size());
+            if (!validateIdentifier(candidate_id, "event_id", candidate_id).ok()) {
+                continue;
+            }
+            auto conf_res = verifyRelativePathUnderRoot(
+                std::filesystem::path("events") / fname, candidate_id);
+            if (conf_res.ok()) {
+                event_ids.push_back(candidate_id);
+            }
+        }
+
+        std::sort(event_ids.begin(), event_ids.end());
+        event_ids.erase(std::unique(event_ids.begin(), event_ids.end()), event_ids.end());
+        return Result<std::vector<std::string>>::success(std::move(event_ids));
+    }
 
     /**
      * @brief Confine an arbitrary relative path under data_root, verifying that it does

@@ -1,10 +1,10 @@
-Start testing: Oct 22 18:02 India Standard Time
+Start testing: Oct 22 23:42 India Standard Time
 ----------------------------------------------------------
 1/2 Testing: f1_sim_dal_tests
 1/2 Test: f1_sim_dal_tests
 Command: "C:/Users/cauch/proj/F1_Sim/build-ucrt64/f1_sim_dal_tests.exe" "C:/Users/cauch/proj/F1_Sim/data"
 Directory: C:/Users/cauch/proj/F1_Sim/build-ucrt64
-"f1_sim_dal_tests" start time: Oct 22 18:02 India Standard Time
+"f1_sim_dal_tests" start time: Oct 22 23:42 India Standard Time
 Output:
 ----------------------------------------------------------
 ====================================================================
@@ -29,14 +29,16 @@ Configured data_root: C:/Users/cauch/proj/F1_Sim/data
 [       OK ] Test08_NonSilverstoneEventAndSnapshotReuse
 [ RUN      ] Test09_EngineReportedDiscrepancyFeedback
 [       OK ] Test09_EngineReportedDiscrepancyFeedback
+[ RUN      ] Test10_ListAvailableEventIds
+[       OK ] Test10_ListAvailableEventIds
 ====================================================================
-Tests run: 9, Failures: 0
+Tests run: 10, Failures: 0
 ====================================================================
 <end of output>
-Test time =   0.76 sec
+Test time =   0.86 sec
 ----------------------------------------------------------
 Test Passed.
-"f1_sim_dal_tests" end time: Oct 22 18:02 India Standard Time
+"f1_sim_dal_tests" end time: Oct 22 23:42 India Standard Time
 "f1_sim_dal_tests" time elapsed: 00:00:00
 ----------------------------------------------------------
 
@@ -44,7 +46,7 @@ Test Passed.
 2/2 Test: f1_sim_simulation_tests
 Command: "C:/Users/cauch/proj/F1_Sim/build-ucrt64/f1_sim_simulation_tests.exe" "C:/Users/cauch/proj/F1_Sim/data"
 Directory: C:/Users/cauch/proj/F1_Sim/build-ucrt64
-"f1_sim_simulation_tests" start time: Oct 22 18:02 India Standard Time
+"f1_sim_simulation_tests" start time: Oct 22 23:42 India Standard Time
 Output:
 ----------------------------------------------------------
 ====================================================================
@@ -67,15 +69,25 @@ Configured data_root: C:/Users/cauch/proj/F1_Sim/data
 [       OK ] Test07_DALIntegrationAndCapabilityGating
 [ RUN      ] Test08_MathematicalConformanceAndSyntheticExamples
 [       OK ] Test08_MathematicalConformanceAndSyntheticExamples
+[ RUN      ] Test09_CliFlagsHelpCheckOnlySmokeTestAndDefaultMenu
+[       OK ] Test09_CliFlagsHelpCheckOnlySmokeTestAndDefaultMenu
+[ RUN      ] Test10_CliEventSelectionInventoryAgeHealthAndReset
+[       OK ] Test10_CliEventSelectionInventoryAgeHealthAndReset
+[ RUN      ] Test11_CliStrategyBuilderAndPreplannedExecution
+[       OK ] Test11_CliStrategyBuilderAndPreplannedExecution
+[ RUN      ] Test12_CliInteractiveModeDecisionsAndMandatoryStopNonOverride
+[       OK ] Test12_CliInteractiveModeDecisionsAndMandatoryStopNonOverride
+[ RUN      ] Test13_CliStepByStepPauseResumeAndCancel
+[       OK ] Test13_CliStepByStepPauseResumeAndCancel
 ====================================================================
-Tests run: 8, Failures: 0
+Tests run: 13, Failures: 0
 ====================================================================
 <end of output>
-Test time =   0.55 sec
+Test time =   0.73 sec
 ----------------------------------------------------------
 Test Passed.
-"f1_sim_simulation_tests" end time: Oct 22 18:02 India Standard Time
+"f1_sim_simulation_tests" end time: Oct 22 23:42 India Standard Time
 "f1_sim_simulation_tests" time elapsed: 00:00:00
 ----------------------------------------------------------
 
-End testing: Oct 22 18:02 India Standard Time
+End testing: Oct 22 23:42 India Standard Time

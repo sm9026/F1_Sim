@@ -609,6 +609,35 @@ bool testEngineReportedDiscrepancyFeedback(const fs::path& real_data_root) {
     return true;
 }
 
+// ============================================================================
+// TEST 10: Read-only discovery of available event IDs via listAvailableEventIds
+// ============================================================================
+bool testListAvailableEventIds(const fs::path& real_data_root) {
+    DataAccessLayer dal(real_data_root);
+    auto real_list = dal.listAvailableEventIds();
+    EXPECT_TRUE(real_list.ok(), "listAvailableEventIds on real data_root should succeed");
+    EXPECT_EQ(real_list.value->size(), std::size_t(1), "Real repository contains exactly 1 event");
+    EXPECT_EQ(real_list.value->front(), std::string("2026_british_gp"), "Expected 2026_british_gp");
+
+    ScopedTempDataRoot temp_env("event_discovery", real_data_root);
+    writeTextFile(temp_env.path() / "events/2026_belgian_gp_config.json", "{}");
+    writeTextFile(temp_env.path() / "events/INVALID-ID!_config.json", "{}");
+    writeTextFile(temp_env.path() / "events/not_a_config_file.json", "{}");
+
+    DataAccessLayer temp_dal(temp_env.path());
+    auto temp_list = temp_dal.listAvailableEventIds();
+    EXPECT_TRUE(temp_list.ok(), "listAvailableEventIds on temp data_root should succeed");
+    EXPECT_EQ(temp_list.value->size(), std::size_t(2), "Expected 2 valid event IDs in sorted order");
+    EXPECT_EQ((*temp_list.value)[0], std::string("2026_belgian_gp"), "First sorted ID must be 2026_belgian_gp");
+    EXPECT_EQ((*temp_list.value)[1], std::string("2026_british_gp"), "Second sorted ID must be 2026_british_gp");
+
+    DataAccessLayer bad_dal(fs::temp_directory_path() / "nonexistent_f1_sim_root_xyz");
+    auto bad_list = bad_dal.listAvailableEventIds();
+    EXPECT_TRUE(!bad_list.ok(), "Invalid data_root must fail listAvailableEventIds");
+
+    return true;
+}
+
 void runTest(const char* name, bool (*fn)(const fs::path&), const fs::path& data_root) {
     ++g_tests_run;
     std::cout << "[ RUN      ] " << name << "\n";
@@ -642,6 +671,7 @@ int main(int argc, char** argv) {
     runTest("Test07_BrokenCrossDatasetReferences", testBrokenCrossDatasetReferences, data_root);
     runTest("Test08_NonSilverstoneEventAndSnapshotReuse", testNonSilverstoneEventAndSnapshotReuse, data_root);
     runTest("Test09_EngineReportedDiscrepancyFeedback", testEngineReportedDiscrepancyFeedback, data_root);
+    runTest("Test10_ListAvailableEventIds", testListAvailableEventIds, data_root);
 
     std::cout << "====================================================================\n";
     std::cout << "Tests run: " << g_tests_run << ", Failures: " << g_tests_failed << "\n";

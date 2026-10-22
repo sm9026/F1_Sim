@@ -1,3 +1,5 @@
+#define F1_SIM_CLI_LIBRARY_ONLY
+#include "main.cpp"
 #include "f1_sim/simulation/race_session.hpp"
 
 #include <cmath>
@@ -5,6 +7,7 @@
 #include <filesystem>
 #include <iostream>
 #include <memory>
+#include <sstream>
 #include <string>
 #include <vector>
 
@@ -489,7 +492,6 @@ bool testPreplannedModeAndShortfallCascade(const fs::path& real_data_root) {
     EXPECT_EQ(res.stints[2].actual_laps_completed, 35, "Stint 3 actual laps = 35 (8 + 17 + 35 = 60)");
     EXPECT_EQ(res.interventions.size(), std::size_t(2), "2 cascade records logged");
 
-    // Verify coinciding planned boundary + mandatory health trigger creates ONE stop, not two:
     session.setStrategyPlan(StrategyPlan{
         {{TyreRole::Soft, 8}, {TyreRole::Hard, 52}}});
     EXPECT_TRUE(session.start().ok(), "Start coinciding boundary test");
@@ -983,6 +985,378 @@ bool testMathematicalConformanceAndSyntheticExamples(const fs::path& real_data_r
     return true;
 }
 
+// ============================================================================
+// INTERACTIVE CLI VERIFICATION SUITES (Tests 09 - 13)
+// ============================================================================
+using namespace f1_sim::cli;
+
+bool containsSubstr(const std::string& haystack, const std::string& needle) {
+    return haystack.find(needle) != std::string::npos;
+}
+
+bool testCliFlagsHelpCheckOnlySmokeTestAndDefaultMenu(const fs::path& data_root) {
+    {
+        CliOptions opts;
+        opts.data_root = data_root;
+        opts.explicit_data_root = true;
+
+        std::istringstream in("7\n");
+        std::ostringstream out;
+        std::ostringstream err;
+
+        CliApp app(opts, in, out, err);
+        const int rc = app.run("f1_sim");
+        EXPECT_EQ(rc, kExitOk, "Launching without flags and choosing 7 (Exit) must return 0");
+        const std::string output = out.str();
+        EXPECT_TRUE(containsSubstr(output, "Main Menu:"), "Must open Interactive Main Menu");
+        EXPECT_TRUE(containsSubstr(output, "1. Select event / track"), "Must show Option 1");
+        EXPECT_TRUE(containsSubstr(output, "2. Configure tyre inventory"), "Must show Option 2");
+        EXPECT_TRUE(containsSubstr(output, "3. Build or edit race strategy"), "Must show Option 3");
+        EXPECT_TRUE(containsSubstr(output, "4. Configure race settings"), "Must show Option 4");
+        EXPECT_TRUE(containsSubstr(output, "5. Inspect data readiness and model assumptions"), "Must show Option 5");
+        EXPECT_TRUE(containsSubstr(output, "6. Start simulation"), "Must show Option 6");
+        EXPECT_TRUE(containsSubstr(output, "7. Exit"), "Must show Option 7");
+        EXPECT_TRUE(!app.session().lastResult().has_value(),
+                    "Default launch without --smoke-test must NOT auto-execute a race");
+    }
+
+    {
+        const char* argv[] = {"f1_sim", "--help"};
+        CliOptions opts;
+        std::string err_msg;
+        EXPECT_TRUE(parseCliArgs(2, const_cast<char**>(argv), opts, err_msg), "Parse --help");
+        EXPECT_TRUE(opts.show_help, "show_help must be true");
+
+        std::istringstream in("");
+        std::ostringstream out;
+        std::ostringstream err;
+        CliApp app(opts, in, out, err);
+        EXPECT_EQ(app.run("f1_sim"), kExitOk, "--help must return 0");
+        EXPECT_TRUE(containsSubstr(out.str(), "--smoke-test"), "--help must document --smoke-test");
+        EXPECT_TRUE(containsSubstr(out.str(), "--check-only"), "--help must document --check-only");
+    }
+
+    {
+        CliOptions opts;
+        opts.data_root = data_root;
+        opts.explicit_data_root = true;
+        opts.check_only = true;
+
+        std::istringstream in("");
+        std::ostringstream out;
+        std::ostringstream err;
+        CliApp app(opts, in, out, err);
+        EXPECT_EQ(app.run("f1_sim"), kExitOk, "--check-only must return 0");
+        EXPECT_TRUE(containsSubstr(out.str(), "[--check-only] Dataset and readiness inspection complete."),
+                    "--check-only must complete inspection without running a race");
+    }
+
+    {
+        CliOptions opts;
+        opts.data_root = data_root;
+        opts.explicit_data_root = true;
+        opts.smoke_test = true;
+
+        std::istringstream in("");
+        std::ostringstream out;
+        std::ostringstream err;
+        CliApp app(opts, in, out, err);
+        EXPECT_EQ(app.run("f1_sim"), kExitOk, "--smoke-test must return 0");
+        EXPECT_TRUE(app.session().lastResult().has_value(), "--smoke-test must produce a RaceResult");
+        const RaceResult& res = *app.session().lastResult();
+        EXPECT_EQ(res.completed_race_laps, 52, "Smoke test must complete 52 laps");
+        EXPECT_EQ(res.stints.size(), std::size_t(2), "Smoke test must have 2 stints");
+        EXPECT_EQ(res.stints[0].actual_laps_completed, 18, "Stint 1 = 18 laps Soft");
+        EXPECT_EQ(res.stints[1].actual_laps_completed, 34, "Stint 2 = 34 laps Hard");
+        EXPECT_NEAR(res.total_race_time_s, 4724.174, 1e-3, "Smoke test total race time must be 4724.174 s");
+        EXPECT_TRUE(containsSubstr(out.str(), "VERIFIED (all 7 sets restored to pre-race configured state)"),
+                    "Smoke test must verify post-run inventory reset");
+    }
+
+    {
+        CliOptions opts;
+        opts.data_root = data_root;
+        opts.explicit_data_root = true;
+        opts.smoke_test = true;
+        opts.strict_calibrated = true;
+
+        std::istringstream in("");
+        std::ostringstream out;
+        std::ostringstream err;
+        CliApp app(opts, in, out, err);
+        EXPECT_EQ(app.run("f1_sim"), kExitValidationError,
+                  "--strict-calibrated must block uncalibrated execution with exit code 3");
+    }
+
+    return true;
+}
+
+bool testEventSelectionAndTyreInventoryWorkflow(const fs::path& data_root) {
+    CliOptions opts;
+    opts.data_root = data_root;
+    opts.explicit_data_root = true;
+
+    std::ostringstream script;
+    script << "2\n"      // Main Menu: 2. Configure tyre inventory
+           << "2\n"      // Inventory: 2. Edit age
+           << "S1\n"     // Set S1
+           << "5\n"      // Age 5 laps
+           << "4\n"      // Return to main menu
+           << "1\n"      // Main Menu: 1. Select event / track
+           << "1\n"      // Select event #1 (2026_british_gp)
+           << "n\n"      // Decline confirmation -> S1 must remain at age 5
+           << "1\n"      // Main Menu: 1. Select event / track
+           << "2026_british_gp\n" // Select by event_id
+           << "y\n"      // Confirm event selection -> resets all ages to 0
+           << "2\n"      // Main Menu: 2. Configure tyre inventory
+           << "2\n"      // Edit age
+           << "S99\n"    // Invalid set ID -> rejected by engine
+           << "M1\n"     // Valid set M1
+           << "-3\n"     // Invalid negative age -> rejected
+           << "abc\n"    // Non-numeric age -> rejected
+           << "4\n"      // Valid age 4 laps
+           << "4\n"      // Return to main menu
+           << "4\n"      // Main Menu: 4. Configure race settings
+           << "4\n"      // Toggle strict calibration gate ON
+           << "6\n"      // Return to main menu
+           << "2\n"      // Main Menu: 2. Configure tyre inventory (M1 age=4 with uncalibrated raw dataset -> UNAVAILABLE)
+           << "3\n"      // Reset all 7 sets to age 0
+           << "4\n"      // Return to main menu
+           << "7\n";     // Exit
+
+    std::istringstream in(script.str());
+    std::ostringstream out;
+    std::ostringstream err;
+
+    CliApp app(opts, in, out, err);
+    const int rc = app.run("f1_sim");
+    EXPECT_EQ(rc, kExitOk, "Interactive event & inventory workflow must exit cleanly with 0");
+
+    const std::string output = out.str();
+    EXPECT_TRUE(containsSubstr(output, "1 valid event found (only one event is available in the current dataset)"),
+                "Criterion 5: Must clearly report that only 1 valid event is available");
+    EXPECT_TRUE(containsSubstr(output, "Event switch cancelled. Retaining existing event and tyre-set ages."),
+                "Declining event switch confirmation must retain ages");
+    EXPECT_TRUE(containsSubstr(output, "Successfully selected event '2026_british_gp'. All 7 physical tyre sets have been reset to age 0 laps."),
+                "Criterion 4 & 16: Confirming event selection loads event and resets tyre ages to 0");
+    EXPECT_TRUE(containsSubstr(output, "Unknown tyre set ID 'S99'"),
+                "Invalid set ID must be rejected with engine diagnostic");
+    EXPECT_TRUE(containsSubstr(output, "UNAVAILABLE (uncalibrated wear rate)"),
+                "Criterion 6: Unavailable health must be displayed as UNAVAILABLE, never as 0%");
+    EXPECT_TRUE(containsSubstr(output, "All seven physical tyre sets (S1..S3, M1..M2, H1..H2) reset to age 0 laps"),
+                "Criterion 6: Resetting all 7 sets to age 0 must succeed");
+
+    for (const auto& s : app.session().tyreInventory()) {
+        EXPECT_EQ(s.configured_age_laps, 0, "All sets must end at age 0 after reset");
+    }
+
+    return true;
+}
+
+bool testStrategyBuilderValidationAndPreplannedRepeatedRuns(const fs::path& data_root) {
+    CliOptions opts;
+    opts.data_root = data_root;
+    opts.explicit_data_root = true;
+
+    std::ostringstream script;
+    script << "2\n"      // Main Menu: 2. Configure tyre inventory
+           << "2\n"      // Edit age
+           << "S2\n"     // Set S2
+           << "3\n"      // Age 3 laps
+           << "4\n"      // Return to main menu
+           << "3\n"      // Main Menu: 3. Build or edit race strategy
+           << "1\n"      // Invalid Strategy #1: total laps 15 + 20 = 35 != 52
+           << "2\n"
+           << "S\nS1\n15\n"
+           << "H\nH1\n20\n"
+           << "1\n"      // Invalid Strategy #2: duplicate set S1
+           << "2\n"
+           << "S\nS1\n20\n"
+           << "S\nS1\n32\n"
+           << "1\n"      // Invalid Strategy #3: incompatible set-role (Soft with H1)
+           << "2\n"
+           << "S\nH1\n20\n"
+           << "H\nH2\n32\n"
+           << "1\n"      // Valid 3-stint strategy: (Soft, S2, 15), (Medium, M1, 20), (Hard, H1, 17)
+           << "3\n"
+           << "S\nS2\n15\n"
+           << "M\nM1\n20\n"
+           << "H\nH1\n17\n"
+           << "y\n"      // Confirm and commit valid strategy
+           << "7\n"      // Return to main menu
+           << "6\n"      // Main Menu: 6. Start simulation (#1)
+           << "y\n"      // Confirm lower-fidelity execution
+           << "1\n"      // Automatic progression
+           << "1\n"      // Post-Race Menu: 1. Run another simulation with same event, inventory ages, and strategy
+           << "y\n"      // Confirm lower-fidelity execution
+           << "1\n"      // Automatic progression
+           << "6\n";     // Post-Race Menu: 6. Exit
+
+    std::istringstream in(script.str());
+    std::ostringstream out;
+    std::ostringstream err;
+
+    CliApp app(opts, in, out, err);
+    const int rc = app.run("f1_sim");
+    EXPECT_EQ(rc, kExitOk, "Strategy builder and repeated preplanned runs must return 0");
+
+    const std::string output = out.str();
+    EXPECT_TRUE(containsSubstr(output, "Sum of target stint lengths (35) must equal configured race_distance_laps (52)"),
+                "Criterion 9: Must reject strategy whose stint lengths do not sum to 52");
+    EXPECT_TRUE(containsSubstr(output, "Physical tyre set 'S1' is assigned to multiple stints in the same race"),
+                "Criterion 9: Must reject duplicate physical tyre set assignment");
+    EXPECT_TRUE(containsSubstr(output, "Requested tyre set 'H1' has role HARD, which does not match stint role SOFT"),
+                "Criterion 9: Must reject incompatible set-role assignment");
+    EXPECT_TRUE(containsSubstr(output, "[STRATEGY VALID] All stint lengths, role mappings, and physical set allocations are valid."),
+                "Criterion 8: Valid 3-stint strategy must pass engine validation");
+
+    EXPECT_TRUE(app.session().lastResult().has_value(), "Race result must be present");
+    const RaceResult& res = *app.session().lastResult();
+    EXPECT_EQ(res.completed_race_laps, 52, "Criterion 10: Preplanned 3-stint race must complete all 52 laps");
+    EXPECT_EQ(res.stints.size(), std::size_t(3), "Must have 3 stints");
+    EXPECT_EQ(res.stints[0].assigned_set_id, std::string("S2"), "Stint 1 used S2");
+    EXPECT_EQ(res.stints[0].set_configured_age_at_fit_laps, 3, "S2 started at configured age 3 laps across repeated runs");
+    EXPECT_EQ(res.stints[1].assigned_set_id, std::string("M1"), "Stint 2 used M1");
+    EXPECT_EQ(res.stints[2].assigned_set_id, std::string("H1"), "Stint 3 used H1");
+
+    for (const auto& s : app.session().tyreInventory()) {
+        EXPECT_TRUE(!s.currently_fitted && !s.consumed_in_current_run,
+                    "Criterion 14: Post-run fitted and consumed flags must be reset");
+        EXPECT_EQ(s.runtime_age_laps, s.configured_age_laps,
+                  "Criterion 14: Post-run runtime_age_laps must equal configured_age_laps");
+        if (s.set_id == "S2") {
+            EXPECT_EQ(s.configured_age_laps, 3, "Criterion 14 & 15: S2 configured age (3) must persist across runs");
+        }
+    }
+
+    return true;
+}
+
+bool testInteractiveModeDecisionsAndMandatoryStopHandling(const fs::path& data_root) {
+    CliOptions opts;
+    opts.data_root = data_root;
+    opts.explicit_data_root = true;
+    opts.race_mode = RaceMode::Interactive;
+
+    std::ostringstream script;
+    script << "2\n"      // Main Menu: 2. Configure tyre inventory
+           << "2\n"      // Edit age
+           << "S1\n"     // Set S1
+           << "15\n"     // Age 15 laps (starts at ~52.8% health; breaches <30% after 7 race laps!)
+           << "4\n"      // Return to main menu
+           << "3\n"      // Main Menu: 3. Strategy Builder
+           << "1\n"      // Build from scratch
+           << "2\n"      // 2 stints
+           << "S\nS1\n20\n" // Stint 1: Soft (S1, age 15), target 20 laps (triggers mandatory stop at Lap 7!)
+           << "H\nH1\n32\n" // Stint 2: Hard (H1), target 32 laps
+           << "y\n"      // Commit strategy
+           << "7\n"      // Return to main menu
+           << "6\n"      // Main Menu: 6. Start simulation
+           << "y\n"      // Confirm lower-fidelity execution
+           << "1\n"      // Automatic progression to first decision point (Mandatory Stop at Lap 7, 45 laps remaining)
+           << "2\n"      // Attempt Option 2 (Extend current stint) -> MUST be rejected (MandatoryStopCannotBeOverridden)!
+           << "1\n"      // Attempt Option 1 (KeepOriginalPlan: 32L != 45L) -> MUST be rejected (no silent cascade)!
+           << "3\n"      // Option 3: PitNowWithRevisedPlan
+           << "1\nH\nH1\n30\n" // Invalid remaining lap sum (30 != 45) -> rejected without corrupting state!
+           << "3\n"      // Option 3: PitNowWithRevisedPlan (valid revision for 45 remaining laps)
+           << "2\n"      // 2 remaining stints
+           << "M\nM1\n18\n" // Stint 2: Medium (M1), 18 laps (Lap 8..25)
+           << "H\nH1\n27\n" // Stint 3: Hard (H1), 27 laps (Lap 26..52; 18 + 27 = 45 laps)
+           << "2\n"      // Option 2: ExtendCurrentStint at Lap 25
+           << "2\n"      // +2 additional laps
+           << "n\n"      // Do NOT revise remaining stints -> rejected (2 + 27 = 29 != 27, no auto-subtraction)!
+           << "2\n"      // Option 2: ExtendCurrentStint
+           << "2\n"      // +2 additional laps (leaving 25 laps for Stint 3)
+           << "y\n"      // Revise remaining stints
+           << "1\n"      // 1 remaining stint
+           << "H\nH1\n25\n" // Stint 3: Hard (H1), 25 laps (2 + 25 = 27 remaining laps)
+           << "1\n"      // Option 1 at Lap 27: KeepOriginalPlan (pit onto H1 for final 25 laps)
+           << "6\n";     // Exit
+
+    std::istringstream in(script.str());
+    std::ostringstream out;
+    std::ostringstream err;
+
+    CliApp app(opts, in, out, err);
+    const int rc = app.run("f1_sim");
+    EXPECT_EQ(rc, kExitOk, "Interactive decision workflow must complete and return 0");
+
+    const std::string output = out.str();
+    EXPECT_TRUE(containsSubstr(output, "INTERACTIVE RACE DECISION REQUIRED — END OF LAP 7"),
+                "Criterion 11 & 13: Must pause at Lap 7 for Mandatory Health Stop decision");
+    EXPECT_TRUE(containsSubstr(output, "[MANDATORY STOP CANNOT BE OVERRIDDEN]"),
+                "Criterion 13: Must reject extending stint when mandatory health stop is active");
+    EXPECT_TRUE(containsSubstr(output, "The engine does not automatically subtract an extension or cascade a shortfall in Interactive mode."),
+                "Criterion 12 & 13: Must reject un-replanned shortfall and unadjusted extension without auto-cascading or auto-subtracting");
+
+    EXPECT_TRUE(app.session().lastResult().has_value(), "Race must finish with a valid RaceResult");
+    const RaceResult& res = *app.session().lastResult();
+    EXPECT_EQ(res.completed_race_laps, 52, "Interactive race must complete all 52 laps");
+    EXPECT_EQ(res.stints.size(), std::size_t(3), "Completed 3 stints after interactive re-plan");
+    EXPECT_EQ(res.stints[0].actual_laps_completed, 7, "Stint 1 ran 7 laps before mandatory health stop");
+    EXPECT_TRUE(res.stints[0].ended_by_mandatory_stop, "Stint 1 marked ended_by_mandatory_stop");
+    EXPECT_EQ(res.stints[1].actual_laps_completed, 20, "Stint 2 ran 18 + 2 extended = 20 laps on M1");
+    EXPECT_EQ(res.stints[2].actual_laps_completed, 25, "Stint 3 ran 25 laps on H1 (7 + 20 + 25 = 52)");
+    EXPECT_EQ(res.interventions.size(), std::size_t(3), "3 committed interactive decisions logged");
+
+    return true;
+}
+
+bool testStepByStepPauseResumeAndCancel(const fs::path& data_root) {
+    CliOptions opts;
+    opts.data_root = data_root;
+    opts.explicit_data_root = true;
+
+    std::ostringstream script;
+    script << "3\n"      // Main Menu: 3. Strategy Builder
+           << "1\n"      // Build from scratch
+           << "2\n"      // 2 stints
+           << "S\nAUTO\n18\n"
+           << "H\nAUTO\n34\n"
+           << "y\n"      // Commit strategy
+           << "7\n"      // Return to main menu
+           << "6\n"      // Main Menu: 6. Start simulation
+           << "y\n"      // Confirm lower-fidelity execution
+           << "2\n"      // Select 2: Step-by-step / Pauseable lap control
+           << "2\n"      // Advance 1 lap (Lap 1)
+           << "4\n"      // Pause simulation after Lap 1
+           << "5\n"      // Inspect live telemetry snapshot while PAUSED
+           << "4\n"      // Resume simulation
+           << "3\n"      // Advance N laps
+           << "3\n"      // Advance 3 laps (Laps 2, 3, 4)
+           << "6\n"      // Cancel active race after Lap 4
+           << "6\n";     // Post-simulation menu: 6. Exit
+
+    std::istringstream in(script.str());
+    std::ostringstream out;
+    std::ostringstream err;
+
+    CliApp app(opts, in, out, err);
+    const int rc = app.run("f1_sim");
+    EXPECT_EQ(rc, kExitOk, "Step-by-step pause/resume/cancel workflow must return 0");
+
+    const std::string output = out.str();
+    EXPECT_TRUE(containsSubstr(output, "[PAUSED] Simulation paused at safe lap boundary after Lap 1."),
+                "Must support pausing at safe lap boundary");
+    EXPECT_TRUE(containsSubstr(output, "--- Live Race Snapshot (State: PAUSED) ---"),
+                "Must support inspecting live telemetry snapshot while paused");
+    EXPECT_TRUE(containsSubstr(output, "[RESUMED] Simulation resumed from Lap 1."),
+                "Must support resuming paused simulation");
+    EXPECT_TRUE(containsSubstr(output, "[CANCELLED] Active race cancelled after Lap 4."),
+                "Must support cancelling active simulation and resetting runtime tyre state");
+
+    EXPECT_TRUE(app.session().lastResult().has_value(), "Cancelled race must record partial RaceResult");
+    EXPECT_EQ(app.session().lastResult()->terminal_state, SessionState::Cancelled, "Terminal state is Cancelled");
+    EXPECT_EQ(app.session().lastResult()->completed_race_laps, 4, "Completed 4 laps before cancellation");
+
+    for (const auto& s : app.session().tyreInventory()) {
+        EXPECT_TRUE(!s.currently_fitted && !s.consumed_in_current_run,
+                    "Cancelled simulation must restore all 7 tyre sets to unconsumed state");
+    }
+
+    return true;
+}
+
 void runTest(const char* name, bool (*fn)(const fs::path&), const fs::path& data_root) {
     ++g_tests_run;
     std::cout << "[ RUN      ] " << name << "\n";
@@ -1015,6 +1389,11 @@ int main(int argc, char** argv) {
     runTest("Test06_LifecyclePauseResumeAndSnapshotDeterminism", testLifecyclePauseResumeAndSnapshotDeterminism, data_root);
     runTest("Test07_DALIntegrationAndCapabilityGating", testDALIntegrationAndCapabilityGating, data_root);
     runTest("Test08_MathematicalConformanceAndSyntheticExamples", testMathematicalConformanceAndSyntheticExamples, data_root);
+    runTest("Test09_CliFlagsHelpCheckOnlySmokeTestAndDefaultMenu", testCliFlagsHelpCheckOnlySmokeTestAndDefaultMenu, data_root);
+    runTest("Test10_CliEventSelectionInventoryAgeHealthAndReset", testEventSelectionAndTyreInventoryWorkflow, data_root);
+    runTest("Test11_CliStrategyBuilderAndPreplannedExecution", testStrategyBuilderValidationAndPreplannedRepeatedRuns, data_root);
+    runTest("Test12_CliInteractiveModeDecisionsAndMandatoryStopNonOverride", testInteractiveModeDecisionsAndMandatoryStopHandling, data_root);
+    runTest("Test13_CliStepByStepPauseResumeAndCancel", testStepByStepPauseResumeAndCancel, data_root);
 
     std::cout << "====================================================================\n";
     std::cout << "Tests run: " << g_tests_run << ", Failures: " << g_tests_failed << "\n";

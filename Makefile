@@ -1,7 +1,7 @@
 CXX ?= g++
 AR ?= ar
 CXXFLAGS ?= -std=c++17 -O2 -Wall -Wextra -Wpedantic -Werror
-INCLUDES := -Iinclude -Isrc/data_access
+INCLUDES := -Iinclude -Isrc/data_access -Isrc
 
 BUILD_DIR := build
 DAL_LIB := $(BUILD_DIR)/libf1_sim_dal.a
@@ -21,7 +21,7 @@ SIM_OBJS := \
 	$(BUILD_DIR)/strategy_validator.o \
 	$(BUILD_DIR)/race_session.o
 
-.PHONY: all test run clean
+.PHONY: all test run smoke-test clean
 
 all: $(DAL_LIB) $(SIM_LIB) $(APP_BIN) $(DAL_TEST_BIN) $(SIM_TEST_BIN)
 
@@ -61,11 +61,14 @@ $(APP_BIN): src/main.cpp $(SIM_LIB) $(DAL_LIB)
 $(DAL_TEST_BIN): tests/data_access/dal_tests.cpp $(DAL_LIB)
 	$(CXX) $(CXXFLAGS) $(INCLUDES) $< $(DAL_LIB) -o $@
 
-$(SIM_TEST_BIN): tests/simulation/simulation_tests.cpp $(SIM_LIB) $(DAL_LIB)
+$(SIM_TEST_BIN): tests/simulation/simulation_tests.cpp src/main.cpp $(SIM_LIB) $(DAL_LIB)
 	$(CXX) $(CXXFLAGS) $(INCLUDES) $< $(SIM_LIB) $(DAL_LIB) -o $@
 
 run: $(APP_BIN)
 	./$(APP_BIN) --data-root data
+
+smoke-test: $(APP_BIN)
+	./$(APP_BIN) --data-root data --smoke-test
 
 test: $(DAL_TEST_BIN) $(SIM_TEST_BIN)
 	./$(DAL_TEST_BIN) data

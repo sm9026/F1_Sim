@@ -56,8 +56,6 @@ build CMakeFiles/f1_sim_dal.dir/src/data_access/json_parser.cpp.obj: CXX_COMPILE
   INCLUDES = -IC:/Users/cauch/proj/F1_Sim/include -IC:/Users/cauch/proj/F1_Sim/src/data_access
   OBJECT_DIR = CMakeFiles\f1_sim_dal.dir
   OBJECT_FILE_DIR = CMakeFiles\f1_sim_dal.dir\src\data_access
-  TARGET_COMPILE_PDB = CMakeFiles\f1_sim_dal.dir\f1_sim_dal.pdb
-  TARGET_PDB = libf1_sim_dal.pdb
   TARGET_SUPPORT_DIR = CMakeFiles\f1_sim_dal.dir
 
 build CMakeFiles/f1_sim_dal.dir/src/data_access/dataset_resolver.cpp.obj: CXX_COMPILER__f1_sim_dal_unscanned_Release C$:/Users/cauch/proj/F1_Sim/src/data_access/dataset_resolver.cpp || cmake_object_order_depends_target_f1_sim_dal
@@ -67,8 +65,6 @@ build CMakeFiles/f1_sim_dal.dir/src/data_access/dataset_resolver.cpp.obj: CXX_CO
   INCLUDES = -IC:/Users/cauch/proj/F1_Sim/include -IC:/Users/cauch/proj/F1_Sim/src/data_access
   OBJECT_DIR = CMakeFiles\f1_sim_dal.dir
   OBJECT_FILE_DIR = CMakeFiles\f1_sim_dal.dir\src\data_access
-  TARGET_COMPILE_PDB = CMakeFiles\f1_sim_dal.dir\f1_sim_dal.pdb
-  TARGET_PDB = libf1_sim_dal.pdb
   TARGET_SUPPORT_DIR = CMakeFiles\f1_sim_dal.dir
 
 build CMakeFiles/f1_sim_dal.dir/src/data_access/data_access_layer.cpp.obj: CXX_COMPILER__f1_sim_dal_unscanned_Release C$:/Users/cauch/proj/F1_Sim/src/data_access/data_access_layer.cpp || cmake_object_order_depends_target_f1_sim_dal
@@ -78,8 +74,6 @@ build CMakeFiles/f1_sim_dal.dir/src/data_access/data_access_layer.cpp.obj: CXX_C
   INCLUDES = -IC:/Users/cauch/proj/F1_Sim/include -IC:/Users/cauch/proj/F1_Sim/src/data_access
   OBJECT_DIR = CMakeFiles\f1_sim_dal.dir
   OBJECT_FILE_DIR = CMakeFiles\f1_sim_dal.dir\src\data_access
-  TARGET_COMPILE_PDB = CMakeFiles\f1_sim_dal.dir\f1_sim_dal.pdb
-  TARGET_PDB = libf1_sim_dal.pdb
   TARGET_SUPPORT_DIR = CMakeFiles\f1_sim_dal.dir
 
 
@@ -96,9 +90,8 @@ build libf1_sim_dal.a: CXX_STATIC_LIBRARY_LINKER__f1_sim_dal_Release CMakeFiles/
   OBJECT_DIR = CMakeFiles\f1_sim_dal.dir
   POST_BUILD = cd .
   PRE_LINK = cd .
-  TARGET_COMPILE_PDB = CMakeFiles\f1_sim_dal.dir\f1_sim_dal.pdb
   TARGET_FILE = libf1_sim_dal.a
-  TARGET_PDB = libf1_sim_dal.pdb
+  TARGET_PDB = f1_sim_dal.a.dbg
   TARGET_SUPPORT_DIR = CMakeFiles\f1_sim_dal.dir
 
 # =============================================================================
@@ -117,8 +110,6 @@ build CMakeFiles/f1_sim_engine.dir/src/simulation/lap_evaluator.cpp.obj: CXX_COM
   INCLUDES = -IC:/Users/cauch/proj/F1_Sim/include
   OBJECT_DIR = CMakeFiles\f1_sim_engine.dir
   OBJECT_FILE_DIR = CMakeFiles\f1_sim_engine.dir\src\simulation
-  TARGET_COMPILE_PDB = CMakeFiles\f1_sim_engine.dir\f1_sim_engine.pdb
-  TARGET_PDB = libf1_sim_engine.pdb
   TARGET_SUPPORT_DIR = CMakeFiles\f1_sim_engine.dir
 
 build CMakeFiles/f1_sim_engine.dir/src/simulation/tyre_inventory.cpp.obj: CXX_COMPILER__f1_sim_engine_unscanned_Release C$:/Users/cauch/proj/F1_Sim/src/simulation/tyre_inventory.cpp || cmake_object_order_depends_target_f1_sim_engine
@@ -128,8 +119,6 @@ build CMakeFiles/f1_sim_engine.dir/src/simulation/tyre_inventory.cpp.obj: CXX_CO
   INCLUDES = -IC:/Users/cauch/proj/F1_Sim/include
   OBJECT_DIR = CMakeFiles\f1_sim_engine.dir
   OBJECT_FILE_DIR = CMakeFiles\f1_sim_engine.dir\src\simulation
-  TARGET_COMPILE_PDB = CMakeFiles\f1_sim_engine.dir\f1_sim_engine.pdb
-  TARGET_PDB = libf1_sim_engine.pdb
   TARGET_SUPPORT_DIR = CMakeFiles\f1_sim_engine.dir
 
 build CMakeFiles/f1_sim_engine.dir/src/simulation/strategy_validator.cpp.obj: CXX_COMPILER__f1_sim_engine_unscanned_Release C$:/Users/cauch/proj/F1_Sim/src/simulation/strategy_validator.cpp || cmake_object_order_depends_target_f1_sim_engine
@@ -139,8 +128,6 @@ build CMakeFiles/f1_sim_engine.dir/src/simulation/strategy_validator.cpp.obj: CX
   INCLUDES = -IC:/Users/cauch/proj/F1_Sim/include
   OBJECT_DIR = CMakeFiles\f1_sim_engine.dir
   OBJECT_FILE_DIR = CMakeFiles\f1_sim_engine.dir\src\simulation
-  TARGET_COMPILE_PDB = CMakeFiles\f1_sim_engine.dir\f1_sim_engine.pdb
-  TARGET_PDB = libf1_sim_engine.pdb
   TARGET_SUPPORT_DIR = CMakeFiles\f1_sim_engine.dir
 
 build CMakeFiles/f1_sim_engine.dir/src/simulation/race_session.cpp.obj: CXX_COMPILER__f1_sim_engine_unscanned_Release C$:/Users/cauch/proj/F1_Sim/src/simulation/race_session.cpp || cmake_object_order_depends_target_f1_sim_engine
@@ -150,8 +137,6 @@ build CMakeFiles/f1_sim_engine.dir/src/simulation/race_session.cpp.obj: CXX_COMP
   INCLUDES = -IC:/Users/cauch/proj/F1_Sim/include
   OBJECT_DIR = CMakeFiles\f1_sim_engine.dir
   OBJECT_FILE_DIR = CMakeFiles\f1_sim_engine.dir\src\simulation
-  TARGET_COMPILE_PDB = CMakeFiles\f1_sim_engine.dir\f1_sim_engine.pdb
-  TARGET_PDB = libf1_sim_engine.pdb
   TARGET_SUPPORT_DIR = CMakeFiles\f1_sim_engine.dir
 
 
@@ -168,9 +153,8 @@ build libf1_sim_engine.a: CXX_STATIC_LIBRARY_LINKER__f1_sim_engine_Release CMake
   OBJECT_DIR = CMakeFiles\f1_sim_engine.dir
   POST_BUILD = cd .
   PRE_LINK = cd .
-  TARGET_COMPILE_PDB = CMakeFiles\f1_sim_engine.dir\f1_sim_engine.pdb
   TARGET_FILE = libf1_sim_engine.a
-  TARGET_PDB = libf1_sim_engine.pdb
+  TARGET_PDB = f1_sim_engine.a.dbg
   TARGET_SUPPORT_DIR = CMakeFiles\f1_sim_engine.dir
 
 # =============================================================================
@@ -189,8 +173,6 @@ build CMakeFiles/f1_sim.dir/src/main.cpp.obj: CXX_COMPILER__f1_sim_unscanned_Rel
   INCLUDES = -IC:/Users/cauch/proj/F1_Sim/include
   OBJECT_DIR = CMakeFiles\f1_sim.dir
   OBJECT_FILE_DIR = CMakeFiles\f1_sim.dir\src
-  TARGET_COMPILE_PDB = CMakeFiles\f1_sim.dir\
-  TARGET_PDB = f1_sim.pdb
   TARGET_SUPPORT_DIR = CMakeFiles\f1_sim.dir
 
 
@@ -208,10 +190,9 @@ build f1_sim.exe: CXX_EXECUTABLE_LINKER__f1_sim_Release CMakeFiles/f1_sim.dir/sr
   OBJECT_DIR = CMakeFiles\f1_sim.dir
   POST_BUILD = cd .
   PRE_LINK = cd .
-  TARGET_COMPILE_PDB = CMakeFiles\f1_sim.dir\
   TARGET_FILE = f1_sim.exe
   TARGET_IMPLIB = libf1_sim.dll.a
-  TARGET_PDB = f1_sim.pdb
+  TARGET_PDB = f1_sim.exe.dbg
   TARGET_SUPPORT_DIR = CMakeFiles\f1_sim.dir
 
 # =============================================================================
@@ -230,8 +211,6 @@ build CMakeFiles/f1_sim_dal_tests.dir/tests/data_access/dal_tests.cpp.obj: CXX_C
   INCLUDES = -IC:/Users/cauch/proj/F1_Sim/include
   OBJECT_DIR = CMakeFiles\f1_sim_dal_tests.dir
   OBJECT_FILE_DIR = CMakeFiles\f1_sim_dal_tests.dir\tests\data_access
-  TARGET_COMPILE_PDB = CMakeFiles\f1_sim_dal_tests.dir\
-  TARGET_PDB = f1_sim_dal_tests.pdb
   TARGET_SUPPORT_DIR = CMakeFiles\f1_sim_dal_tests.dir
 
 
@@ -249,10 +228,9 @@ build f1_sim_dal_tests.exe: CXX_EXECUTABLE_LINKER__f1_sim_dal_tests_Release CMak
   OBJECT_DIR = CMakeFiles\f1_sim_dal_tests.dir
   POST_BUILD = cd .
   PRE_LINK = cd .
-  TARGET_COMPILE_PDB = CMakeFiles\f1_sim_dal_tests.dir\
   TARGET_FILE = f1_sim_dal_tests.exe
   TARGET_IMPLIB = libf1_sim_dal_tests.dll.a
-  TARGET_PDB = f1_sim_dal_tests.pdb
+  TARGET_PDB = f1_sim_dal_tests.exe.dbg
   TARGET_SUPPORT_DIR = CMakeFiles\f1_sim_dal_tests.dir
 
 # =============================================================================
@@ -268,11 +246,9 @@ build CMakeFiles/f1_sim_simulation_tests.dir/tests/simulation/simulation_tests.c
   CONFIG = Release
   DEP_FILE = CMakeFiles\f1_sim_simulation_tests.dir\tests\simulation\simulation_tests.cpp.obj.d
   FLAGS = -O3 -DNDEBUG -std=c++17 -Wall -Wextra -Wpedantic
-  INCLUDES = -IC:/Users/cauch/proj/F1_Sim/include
+  INCLUDES = -IC:/Users/cauch/proj/F1_Sim/src -IC:/Users/cauch/proj/F1_Sim/include
   OBJECT_DIR = CMakeFiles\f1_sim_simulation_tests.dir
   OBJECT_FILE_DIR = CMakeFiles\f1_sim_simulation_tests.dir\tests\simulation
-  TARGET_COMPILE_PDB = CMakeFiles\f1_sim_simulation_tests.dir\
-  TARGET_PDB = f1_sim_simulation_tests.pdb
   TARGET_SUPPORT_DIR = CMakeFiles\f1_sim_simulation_tests.dir
 
 
@@ -290,10 +266,9 @@ build f1_sim_simulation_tests.exe: CXX_EXECUTABLE_LINKER__f1_sim_simulation_test
   OBJECT_DIR = CMakeFiles\f1_sim_simulation_tests.dir
   POST_BUILD = cd .
   PRE_LINK = cd .
-  TARGET_COMPILE_PDB = CMakeFiles\f1_sim_simulation_tests.dir\
   TARGET_FILE = f1_sim_simulation_tests.exe
   TARGET_IMPLIB = libf1_sim_simulation_tests.dll.a
-  TARGET_PDB = f1_sim_simulation_tests.pdb
+  TARGET_PDB = f1_sim_simulation_tests.exe.dbg
   TARGET_SUPPORT_DIR = CMakeFiles\f1_sim_simulation_tests.dir
 
 
@@ -361,14 +336,14 @@ build all: phony libf1_sim_dal.a libf1_sim_engine.a f1_sim.exe f1_sim_dal_tests.
 #############################################
 # Re-run CMake if any of its inputs changed.
 
-build build.ninja C$:/Users/cauch/proj/F1_Sim/build-ucrt64/cmake_install.cmake C$:/Users/cauch/proj/F1_Sim/build-ucrt64/CTestTestfile.cmake: RERUN_CMAKE | C$:/Users/cauch/proj/F1_Sim/CMakeLists.txt C$:/msys64/ucrt64/share/cmake/Modules/CMakeCXXCompiler.cmake.in C$:/msys64/ucrt64/share/cmake/Modules/CMakeCXXCompilerABI.cpp C$:/msys64/ucrt64/share/cmake/Modules/CMakeCXXInformation.cmake C$:/msys64/ucrt64/share/cmake/Modules/CMakeCommonLanguageInclude.cmake C$:/msys64/ucrt64/share/cmake/Modules/CMakeCompilerIdDetection.cmake C$:/msys64/ucrt64/share/cmake/Modules/CMakeDetermineCXXCompiler.cmake C$:/msys64/ucrt64/share/cmake/Modules/CMakeDetermineCompiler.cmake C$:/msys64/ucrt64/share/cmake/Modules/CMakeDetermineCompilerABI.cmake C$:/msys64/ucrt64/share/cmake/Modules/CMakeDetermineCompilerId.cmake C$:/msys64/ucrt64/share/cmake/Modules/CMakeDetermineCompilerSupport.cmake C$:/msys64/ucrt64/share/cmake/Modules/CMakeDetermineRCCompiler.cmake C$:/msys64/ucrt64/share/cmake/Modules/CMakeDetermineSystem.cmake C$:/msys64/ucrt64/share/cmake/Modules/CMakeFindBinUtils.cmake C$:/msys64/ucrt64/share/cmake/Modules/CMakeGenericSystem.cmake C$:/msys64/ucrt64/share/cmake/Modules/CMakeInitializeConfigs.cmake C$:/msys64/ucrt64/share/cmake/Modules/CMakeLanguageInformation.cmake C$:/msys64/ucrt64/share/cmake/Modules/CMakeParseImplicitIncludeInfo.cmake C$:/msys64/ucrt64/share/cmake/Modules/CMakeParseImplicitLinkInfo.cmake C$:/msys64/ucrt64/share/cmake/Modules/CMakeParseLibraryArchitecture.cmake C$:/msys64/ucrt64/share/cmake/Modules/CMakeRCCompiler.cmake.in C$:/msys64/ucrt64/share/cmake/Modules/CMakeRCInformation.cmake C$:/msys64/ucrt64/share/cmake/Modules/CMakeSystem.cmake.in C$:/msys64/ucrt64/share/cmake/Modules/CMakeSystemSpecificInformation.cmake C$:/msys64/ucrt64/share/cmake/Modules/CMakeSystemSpecificInitialize.cmake C$:/msys64/ucrt64/share/cmake/Modules/CMakeTestCXXCompiler.cmake C$:/msys64/ucrt64/share/cmake/Modules/CMakeTestCompilerCommon.cmake C$:/msys64/ucrt64/share/cmake/Modules/CMakeTestRCCompiler.cmake C$:/msys64/ucrt64/share/cmake/Modules/Compiler/ADSP-DetermineCompiler.cmake C$:/msys64/ucrt64/share/cmake/Modules/Compiler/ARMCC-DetermineCompiler.cmake C$:/msys64/ucrt64/share/cmake/Modules/Compiler/ARMClang-DetermineCompiler.cmake C$:/msys64/ucrt64/share/cmake/Modules/Compiler/AppleClang-DetermineCompiler.cmake C$:/msys64/ucrt64/share/cmake/Modules/Compiler/Borland-DetermineCompiler.cmake C$:/msys64/ucrt64/share/cmake/Modules/Compiler/CMakeCommonCompilerMacros.cmake C$:/msys64/ucrt64/share/cmake/Modules/Compiler/Clang-DetermineCompiler.cmake C$:/msys64/ucrt64/share/cmake/Modules/Compiler/Clang-DetermineCompilerInternal.cmake C$:/msys64/ucrt64/share/cmake/Modules/Compiler/Compaq-CXX-DetermineCompiler.cmake C$:/msys64/ucrt64/share/cmake/Modules/Compiler/Cray-DetermineCompiler.cmake C$:/msys64/ucrt64/share/cmake/Modules/Compiler/CrayClang-DetermineCompiler.cmake C$:/msys64/ucrt64/share/cmake/Modules/Compiler/Diab-DetermineCompiler.cmake C$:/msys64/ucrt64/share/cmake/Modules/Compiler/Embarcadero-DetermineCompiler.cmake C$:/msys64/ucrt64/share/cmake/Modules/Compiler/Fujitsu-DetermineCompiler.cmake C$:/msys64/ucrt64/share/cmake/Modules/Compiler/FujitsuClang-DetermineCompiler.cmake C$:/msys64/ucrt64/share/cmake/Modules/Compiler/GHS-DetermineCompiler.cmake C$:/msys64/ucrt64/share/cmake/Modules/Compiler/GNU-CXX-CXXImportStd.cmake C$:/msys64/ucrt64/share/cmake/Modules/Compiler/GNU-CXX-DetermineCompiler.cmake C$:/msys64/ucrt64/share/cmake/Modules/Compiler/GNU-CXX.cmake C$:/msys64/ucrt64/share/cmake/Modules/Compiler/GNU-FindBinUtils.cmake C$:/msys64/ucrt64/share/cmake/Modules/Compiler/GNU.cmake C$:/msys64/ucrt64/share/cmake/Modules/Compiler/HP-CXX-DetermineCompiler.cmake C$:/msys64/ucrt64/share/cmake/Modules/Compiler/IAR-DetermineCompiler.cmake C$:/msys64/ucrt64/share/cmake/Modules/Compiler/IBMCPP-CXX-DetermineVersionInternal.cmake C$:/msys64/ucrt64/share/cmake/Modules/Compiler/IBMClang-CXX-DetermineCompiler.cmake C$:/msys64/ucrt64/share/cmake/Modules/Compiler/Intel-DetermineCompiler.cmake C$:/msys64/ucrt64/share/cmake/Modules/Compiler/IntelLLVM-DetermineCompiler.cmake C$:/msys64/ucrt64/share/cmake/Modules/Compiler/LCC-CXX-DetermineCompiler.cmake C$:/msys64/ucrt64/share/cmake/Modules/Compiler/MSVC-DetermineCompiler.cmake C$:/msys64/ucrt64/share/cmake/Modules/Compiler/NVHPC-DetermineCompiler.cmake C$:/msys64/ucrt64/share/cmake/Modules/Compiler/NVIDIA-DetermineCompiler.cmake C$:/msys64/ucrt64/share/cmake/Modules/Compiler/OpenWatcom-DetermineCompiler.cmake C$:/msys64/ucrt64/share/cmake/Modules/Compiler/OrangeC-DetermineCompiler.cmake C$:/msys64/ucrt64/share/cmake/Modules/Compiler/PGI-DetermineCompiler.cmake C$:/msys64/ucrt64/share/cmake/Modules/Compiler/PathScale-DetermineCompiler.cmake C$:/msys64/ucrt64/share/cmake/Modules/Compiler/Renesas-DetermineCompiler.cmake C$:/msys64/ucrt64/share/cmake/Modules/Compiler/SCO-DetermineCompiler.cmake C$:/msys64/ucrt64/share/cmake/Modules/Compiler/SunPro-CXX-DetermineCompiler.cmake C$:/msys64/ucrt64/share/cmake/Modules/Compiler/TI-DetermineCompiler.cmake C$:/msys64/ucrt64/share/cmake/Modules/Compiler/TIClang-DetermineCompiler.cmake C$:/msys64/ucrt64/share/cmake/Modules/Compiler/Tasking-DetermineCompiler.cmake C$:/msys64/ucrt64/share/cmake/Modules/Compiler/VisualAge-CXX-DetermineCompiler.cmake C$:/msys64/ucrt64/share/cmake/Modules/Compiler/Watcom-DetermineCompiler.cmake C$:/msys64/ucrt64/share/cmake/Modules/Compiler/XL-CXX-DetermineCompiler.cmake C$:/msys64/ucrt64/share/cmake/Modules/Compiler/XLClang-CXX-DetermineCompiler.cmake C$:/msys64/ucrt64/share/cmake/Modules/Compiler/zOS-CXX-DetermineCompiler.cmake C$:/msys64/ucrt64/share/cmake/Modules/Internal/CMakeCXXLinkerInformation.cmake C$:/msys64/ucrt64/share/cmake/Modules/Internal/CMakeCommonLinkerInformation.cmake C$:/msys64/ucrt64/share/cmake/Modules/Internal/CMakeDetermineLinkerId.cmake C$:/msys64/ucrt64/share/cmake/Modules/Internal/CMakeInspectCXXLinker.cmake C$:/msys64/ucrt64/share/cmake/Modules/Internal/FeatureTesting.cmake C$:/msys64/ucrt64/share/cmake/Modules/Linker/GNU-CXX.cmake C$:/msys64/ucrt64/share/cmake/Modules/Linker/GNU.cmake C$:/msys64/ucrt64/share/cmake/Modules/Platform/Linker/GNU.cmake C$:/msys64/ucrt64/share/cmake/Modules/Platform/Linker/Windows-GNU-CXX.cmake C$:/msys64/ucrt64/share/cmake/Modules/Platform/Linker/Windows-GNU.cmake C$:/msys64/ucrt64/share/cmake/Modules/Platform/Windows-Determine-CXX.cmake C$:/msys64/ucrt64/share/cmake/Modules/Platform/Windows-GNU-CXX-ABI.cmake C$:/msys64/ucrt64/share/cmake/Modules/Platform/Windows-GNU-CXX.cmake C$:/msys64/ucrt64/share/cmake/Modules/Platform/Windows-GNU.cmake C$:/msys64/ucrt64/share/cmake/Modules/Platform/Windows-Initialize.cmake C$:/msys64/ucrt64/share/cmake/Modules/Platform/Windows-windres.cmake C$:/msys64/ucrt64/share/cmake/Modules/Platform/Windows.cmake C$:/msys64/ucrt64/share/cmake/Modules/Platform/WindowsPaths.cmake CMakeCache.txt CMakeFiles/4.2.3/CMakeCXXCompiler.cmake CMakeFiles/4.2.3/CMakeRCCompiler.cmake CMakeFiles/4.2.3/CMakeSystem.cmake
+build build.ninja C$:/Users/cauch/proj/F1_Sim/build-ucrt64/cmake_install.cmake C$:/Users/cauch/proj/F1_Sim/build-ucrt64/CTestTestfile.cmake: RERUN_CMAKE | C$:/Users/cauch/proj/F1_Sim/CMakeLists.txt C$:/msys64/ucrt64/share/cmake/Modules/CMakeCXXInformation.cmake C$:/msys64/ucrt64/share/cmake/Modules/CMakeCommonLanguageInclude.cmake C$:/msys64/ucrt64/share/cmake/Modules/CMakeGenericSystem.cmake C$:/msys64/ucrt64/share/cmake/Modules/CMakeInitializeConfigs.cmake C$:/msys64/ucrt64/share/cmake/Modules/CMakeLanguageInformation.cmake C$:/msys64/ucrt64/share/cmake/Modules/CMakeRCInformation.cmake C$:/msys64/ucrt64/share/cmake/Modules/CMakeSystemSpecificInformation.cmake C$:/msys64/ucrt64/share/cmake/Modules/CMakeSystemSpecificInitialize.cmake C$:/msys64/ucrt64/share/cmake/Modules/Compiler/CMakeCommonCompilerMacros.cmake C$:/msys64/ucrt64/share/cmake/Modules/Compiler/GNU-CXX.cmake C$:/msys64/ucrt64/share/cmake/Modules/Compiler/GNU.cmake C$:/msys64/ucrt64/share/cmake/Modules/Internal/CMakeCXXLinkerInformation.cmake C$:/msys64/ucrt64/share/cmake/Modules/Internal/CMakeCommonLinkerInformation.cmake C$:/msys64/ucrt64/share/cmake/Modules/Linker/GNU-CXX.cmake C$:/msys64/ucrt64/share/cmake/Modules/Linker/GNU.cmake C$:/msys64/ucrt64/share/cmake/Modules/Platform/Linker/GNU.cmake C$:/msys64/ucrt64/share/cmake/Modules/Platform/Linker/Windows-GNU-CXX.cmake C$:/msys64/ucrt64/share/cmake/Modules/Platform/Linker/Windows-GNU.cmake C$:/msys64/ucrt64/share/cmake/Modules/Platform/Windows-GNU-CXX-ABI.cmake C$:/msys64/ucrt64/share/cmake/Modules/Platform/Windows-GNU-CXX.cmake C$:/msys64/ucrt64/share/cmake/Modules/Platform/Windows-GNU.cmake C$:/msys64/ucrt64/share/cmake/Modules/Platform/Windows-Initialize.cmake C$:/msys64/ucrt64/share/cmake/Modules/Platform/Windows-windres.cmake C$:/msys64/ucrt64/share/cmake/Modules/Platform/Windows.cmake C$:/msys64/ucrt64/share/cmake/Modules/Platform/WindowsPaths.cmake CMakeCache.txt CMakeFiles/4.2.3/CMakeCXXCompiler.cmake CMakeFiles/4.2.3/CMakeRCCompiler.cmake CMakeFiles/4.2.3/CMakeSystem.cmake
   pool = console
 
 
 #############################################
 # A missing CMake input file is not an error.
 
-build C$:/Users/cauch/proj/F1_Sim/CMakeLists.txt C$:/msys64/ucrt64/share/cmake/Modules/CMakeCXXCompiler.cmake.in C$:/msys64/ucrt64/share/cmake/Modules/CMakeCXXCompilerABI.cpp C$:/msys64/ucrt64/share/cmake/Modules/CMakeCXXInformation.cmake C$:/msys64/ucrt64/share/cmake/Modules/CMakeCommonLanguageInclude.cmake C$:/msys64/ucrt64/share/cmake/Modules/CMakeCompilerIdDetection.cmake C$:/msys64/ucrt64/share/cmake/Modules/CMakeDetermineCXXCompiler.cmake C$:/msys64/ucrt64/share/cmake/Modules/CMakeDetermineCompiler.cmake C$:/msys64/ucrt64/share/cmake/Modules/CMakeDetermineCompilerABI.cmake C$:/msys64/ucrt64/share/cmake/Modules/CMakeDetermineCompilerId.cmake C$:/msys64/ucrt64/share/cmake/Modules/CMakeDetermineCompilerSupport.cmake C$:/msys64/ucrt64/share/cmake/Modules/CMakeDetermineRCCompiler.cmake C$:/msys64/ucrt64/share/cmake/Modules/CMakeDetermineSystem.cmake C$:/msys64/ucrt64/share/cmake/Modules/CMakeFindBinUtils.cmake C$:/msys64/ucrt64/share/cmake/Modules/CMakeGenericSystem.cmake C$:/msys64/ucrt64/share/cmake/Modules/CMakeInitializeConfigs.cmake C$:/msys64/ucrt64/share/cmake/Modules/CMakeLanguageInformation.cmake C$:/msys64/ucrt64/share/cmake/Modules/CMakeParseImplicitIncludeInfo.cmake C$:/msys64/ucrt64/share/cmake/Modules/CMakeParseImplicitLinkInfo.cmake C$:/msys64/ucrt64/share/cmake/Modules/CMakeParseLibraryArchitecture.cmake C$:/msys64/ucrt64/share/cmake/Modules/CMakeRCCompiler.cmake.in C$:/msys64/ucrt64/share/cmake/Modules/CMakeRCInformation.cmake C$:/msys64/ucrt64/share/cmake/Modules/CMakeSystem.cmake.in C$:/msys64/ucrt64/share/cmake/Modules/CMakeSystemSpecificInformation.cmake C$:/msys64/ucrt64/share/cmake/Modules/CMakeSystemSpecificInitialize.cmake C$:/msys64/ucrt64/share/cmake/Modules/CMakeTestCXXCompiler.cmake C$:/msys64/ucrt64/share/cmake/Modules/CMakeTestCompilerCommon.cmake C$:/msys64/ucrt64/share/cmake/Modules/CMakeTestRCCompiler.cmake C$:/msys64/ucrt64/share/cmake/Modules/Compiler/ADSP-DetermineCompiler.cmake C$:/msys64/ucrt64/share/cmake/Modules/Compiler/ARMCC-DetermineCompiler.cmake C$:/msys64/ucrt64/share/cmake/Modules/Compiler/ARMClang-DetermineCompiler.cmake C$:/msys64/ucrt64/share/cmake/Modules/Compiler/AppleClang-DetermineCompiler.cmake C$:/msys64/ucrt64/share/cmake/Modules/Compiler/Borland-DetermineCompiler.cmake C$:/msys64/ucrt64/share/cmake/Modules/Compiler/CMakeCommonCompilerMacros.cmake C$:/msys64/ucrt64/share/cmake/Modules/Compiler/Clang-DetermineCompiler.cmake C$:/msys64/ucrt64/share/cmake/Modules/Compiler/Clang-DetermineCompilerInternal.cmake C$:/msys64/ucrt64/share/cmake/Modules/Compiler/Compaq-CXX-DetermineCompiler.cmake C$:/msys64/ucrt64/share/cmake/Modules/Compiler/Cray-DetermineCompiler.cmake C$:/msys64/ucrt64/share/cmake/Modules/Compiler/CrayClang-DetermineCompiler.cmake C$:/msys64/ucrt64/share/cmake/Modules/Compiler/Diab-DetermineCompiler.cmake C$:/msys64/ucrt64/share/cmake/Modules/Compiler/Embarcadero-DetermineCompiler.cmake C$:/msys64/ucrt64/share/cmake/Modules/Compiler/Fujitsu-DetermineCompiler.cmake C$:/msys64/ucrt64/share/cmake/Modules/Compiler/FujitsuClang-DetermineCompiler.cmake C$:/msys64/ucrt64/share/cmake/Modules/Compiler/GHS-DetermineCompiler.cmake C$:/msys64/ucrt64/share/cmake/Modules/Compiler/GNU-CXX-CXXImportStd.cmake C$:/msys64/ucrt64/share/cmake/Modules/Compiler/GNU-CXX-DetermineCompiler.cmake C$:/msys64/ucrt64/share/cmake/Modules/Compiler/GNU-CXX.cmake C$:/msys64/ucrt64/share/cmake/Modules/Compiler/GNU-FindBinUtils.cmake C$:/msys64/ucrt64/share/cmake/Modules/Compiler/GNU.cmake C$:/msys64/ucrt64/share/cmake/Modules/Compiler/HP-CXX-DetermineCompiler.cmake C$:/msys64/ucrt64/share/cmake/Modules/Compiler/IAR-DetermineCompiler.cmake C$:/msys64/ucrt64/share/cmake/Modules/Compiler/IBMCPP-CXX-DetermineVersionInternal.cmake C$:/msys64/ucrt64/share/cmake/Modules/Compiler/IBMClang-CXX-DetermineCompiler.cmake C$:/msys64/ucrt64/share/cmake/Modules/Compiler/Intel-DetermineCompiler.cmake C$:/msys64/ucrt64/share/cmake/Modules/Compiler/IntelLLVM-DetermineCompiler.cmake C$:/msys64/ucrt64/share/cmake/Modules/Compiler/LCC-CXX-DetermineCompiler.cmake C$:/msys64/ucrt64/share/cmake/Modules/Compiler/MSVC-DetermineCompiler.cmake C$:/msys64/ucrt64/share/cmake/Modules/Compiler/NVHPC-DetermineCompiler.cmake C$:/msys64/ucrt64/share/cmake/Modules/Compiler/NVIDIA-DetermineCompiler.cmake C$:/msys64/ucrt64/share/cmake/Modules/Compiler/OpenWatcom-DetermineCompiler.cmake C$:/msys64/ucrt64/share/cmake/Modules/Compiler/OrangeC-DetermineCompiler.cmake C$:/msys64/ucrt64/share/cmake/Modules/Compiler/PGI-DetermineCompiler.cmake C$:/msys64/ucrt64/share/cmake/Modules/Compiler/PathScale-DetermineCompiler.cmake C$:/msys64/ucrt64/share/cmake/Modules/Compiler/Renesas-DetermineCompiler.cmake C$:/msys64/ucrt64/share/cmake/Modules/Compiler/SCO-DetermineCompiler.cmake C$:/msys64/ucrt64/share/cmake/Modules/Compiler/SunPro-CXX-DetermineCompiler.cmake C$:/msys64/ucrt64/share/cmake/Modules/Compiler/TI-DetermineCompiler.cmake C$:/msys64/ucrt64/share/cmake/Modules/Compiler/TIClang-DetermineCompiler.cmake C$:/msys64/ucrt64/share/cmake/Modules/Compiler/Tasking-DetermineCompiler.cmake C$:/msys64/ucrt64/share/cmake/Modules/Compiler/VisualAge-CXX-DetermineCompiler.cmake C$:/msys64/ucrt64/share/cmake/Modules/Compiler/Watcom-DetermineCompiler.cmake C$:/msys64/ucrt64/share/cmake/Modules/Compiler/XL-CXX-DetermineCompiler.cmake C$:/msys64/ucrt64/share/cmake/Modules/Compiler/XLClang-CXX-DetermineCompiler.cmake C$:/msys64/ucrt64/share/cmake/Modules/Compiler/zOS-CXX-DetermineCompiler.cmake C$:/msys64/ucrt64/share/cmake/Modules/Internal/CMakeCXXLinkerInformation.cmake C$:/msys64/ucrt64/share/cmake/Modules/Internal/CMakeCommonLinkerInformation.cmake C$:/msys64/ucrt64/share/cmake/Modules/Internal/CMakeDetermineLinkerId.cmake C$:/msys64/ucrt64/share/cmake/Modules/Internal/CMakeInspectCXXLinker.cmake C$:/msys64/ucrt64/share/cmake/Modules/Internal/FeatureTesting.cmake C$:/msys64/ucrt64/share/cmake/Modules/Linker/GNU-CXX.cmake C$:/msys64/ucrt64/share/cmake/Modules/Linker/GNU.cmake C$:/msys64/ucrt64/share/cmake/Modules/Platform/Linker/GNU.cmake C$:/msys64/ucrt64/share/cmake/Modules/Platform/Linker/Windows-GNU-CXX.cmake C$:/msys64/ucrt64/share/cmake/Modules/Platform/Linker/Windows-GNU.cmake C$:/msys64/ucrt64/share/cmake/Modules/Platform/Windows-Determine-CXX.cmake C$:/msys64/ucrt64/share/cmake/Modules/Platform/Windows-GNU-CXX-ABI.cmake C$:/msys64/ucrt64/share/cmake/Modules/Platform/Windows-GNU-CXX.cmake C$:/msys64/ucrt64/share/cmake/Modules/Platform/Windows-GNU.cmake C$:/msys64/ucrt64/share/cmake/Modules/Platform/Windows-Initialize.cmake C$:/msys64/ucrt64/share/cmake/Modules/Platform/Windows-windres.cmake C$:/msys64/ucrt64/share/cmake/Modules/Platform/Windows.cmake C$:/msys64/ucrt64/share/cmake/Modules/Platform/WindowsPaths.cmake CMakeCache.txt CMakeFiles/4.2.3/CMakeCXXCompiler.cmake CMakeFiles/4.2.3/CMakeRCCompiler.cmake CMakeFiles/4.2.3/CMakeSystem.cmake: phony
+build C$:/Users/cauch/proj/F1_Sim/CMakeLists.txt C$:/msys64/ucrt64/share/cmake/Modules/CMakeCXXInformation.cmake C$:/msys64/ucrt64/share/cmake/Modules/CMakeCommonLanguageInclude.cmake C$:/msys64/ucrt64/share/cmake/Modules/CMakeGenericSystem.cmake C$:/msys64/ucrt64/share/cmake/Modules/CMakeInitializeConfigs.cmake C$:/msys64/ucrt64/share/cmake/Modules/CMakeLanguageInformation.cmake C$:/msys64/ucrt64/share/cmake/Modules/CMakeRCInformation.cmake C$:/msys64/ucrt64/share/cmake/Modules/CMakeSystemSpecificInformation.cmake C$:/msys64/ucrt64/share/cmake/Modules/CMakeSystemSpecificInitialize.cmake C$:/msys64/ucrt64/share/cmake/Modules/Compiler/CMakeCommonCompilerMacros.cmake C$:/msys64/ucrt64/share/cmake/Modules/Compiler/GNU-CXX.cmake C$:/msys64/ucrt64/share/cmake/Modules/Compiler/GNU.cmake C$:/msys64/ucrt64/share/cmake/Modules/Internal/CMakeCXXLinkerInformation.cmake C$:/msys64/ucrt64/share/cmake/Modules/Internal/CMakeCommonLinkerInformation.cmake C$:/msys64/ucrt64/share/cmake/Modules/Linker/GNU-CXX.cmake C$:/msys64/ucrt64/share/cmake/Modules/Linker/GNU.cmake C$:/msys64/ucrt64/share/cmake/Modules/Platform/Linker/GNU.cmake C$:/msys64/ucrt64/share/cmake/Modules/Platform/Linker/Windows-GNU-CXX.cmake C$:/msys64/ucrt64/share/cmake/Modules/Platform/Linker/Windows-GNU.cmake C$:/msys64/ucrt64/share/cmake/Modules/Platform/Windows-GNU-CXX-ABI.cmake C$:/msys64/ucrt64/share/cmake/Modules/Platform/Windows-GNU-CXX.cmake C$:/msys64/ucrt64/share/cmake/Modules/Platform/Windows-GNU.cmake C$:/msys64/ucrt64/share/cmake/Modules/Platform/Windows-Initialize.cmake C$:/msys64/ucrt64/share/cmake/Modules/Platform/Windows-windres.cmake C$:/msys64/ucrt64/share/cmake/Modules/Platform/Windows.cmake C$:/msys64/ucrt64/share/cmake/Modules/Platform/WindowsPaths.cmake CMakeCache.txt CMakeFiles/4.2.3/CMakeCXXCompiler.cmake CMakeFiles/4.2.3/CMakeRCCompiler.cmake CMakeFiles/4.2.3/CMakeSystem.cmake: phony
 
 
 #############################################
