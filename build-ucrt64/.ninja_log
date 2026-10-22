@@ -1,0 +1,16 @@
+# ninja log v7
+30	2753	8143754941520053	CMakeFiles/f1_sim_engine.dir/src/simulation/lap_evaluator.cpp.obj	906bdb1c055a2f5e
+38	3467	8143754941600092	CMakeFiles/f1_sim_engine.dir/src/simulation/tyre_inventory.cpp.obj	d94c759d5fc30d3f
+4	3713	8143754941260068	CMakeFiles/f1_sim_dal.dir/src/data_access/json_parser.cpp.obj	5cced8f0ad097b2e
+67	3737	8143754941880074	CMakeFiles/f1_sim.dir/src/main.cpp.obj	c99f34e68b2df3b1
+14	4066	8143754941350082	CMakeFiles/f1_sim_dal.dir/src/data_access/dataset_resolver.cpp.obj	e90c17fac91827f4
+75	4444	8143754941970070	CMakeFiles/f1_sim_dal_tests.dir/tests/data_access/dal_tests.cpp.obj	fa467508a42c2a80
+46	4744	8143754941670078	CMakeFiles/f1_sim_engine.dir/src/simulation/strategy_validator.cpp.obj	31f5eb454e51c900
+83	5658	8143754942040059	CMakeFiles/f1_sim_simulation_tests.dir/tests/simulation/simulation_tests.cpp.obj	c387c10b2e53ad74
+57	6033	8143754941790064	CMakeFiles/f1_sim_engine.dir/src/simulation/race_session.cpp.obj	5aafc6a4c0a97608
+22	6320	8143754941430073	CMakeFiles/f1_sim_dal.dir/src/data_access/data_access_layer.cpp.obj	f2434679c8c224f1
+6320	6836	8143755004411840	libf1_sim_dal.a	e4d124f8452f454a
+6836	6991	8143755009566313	libf1_sim_engine.a	f6307c781c0cd2aa
+6847	7116	8143755009680334	f1_sim_dal_tests.exe	afe518c82c55cf6a
+6999	7183	8143755011195376	f1_sim_simulation_tests.exe	2224f4d84d6688da
+6991	7185	8143755011125394	f1_sim.exe	d7cc91ceb9f06b1f

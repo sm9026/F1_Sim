@@ -1,0 +1,81 @@
+Start testing: Oct 22 18:02 India Standard Time
+----------------------------------------------------------
+1/2 Testing: f1_sim_dal_tests
+1/2 Test: f1_sim_dal_tests
+Command: "C:/Users/cauch/proj/F1_Sim/build-ucrt64/f1_sim_dal_tests.exe" "C:/Users/cauch/proj/F1_Sim/data"
+Directory: C:/Users/cauch/proj/F1_Sim/build-ucrt64
+"f1_sim_dal_tests" start time: Oct 22 18:02 India Standard Time
+Output:
+----------------------------------------------------------
+====================================================================
+F1 Simulator Data Access Layer (DAL) Verification Suite
+Configured data_root: C:/Users/cauch/proj/F1_Sim/data
+====================================================================
+[ RUN      ] Test01_LoadActualSilverstoneEventBundle
+[       OK ] Test01_LoadActualSilverstoneEventBundle
+[ RUN      ] Test02_IndividualDatasetQueries
+[       OK ] Test02_IndividualDatasetQueries
+[ RUN      ] Test03_NullAndUncalibratedValuesPreservedHonestly
+[       OK ] Test03_NullAndUncalibratedValuesPreservedHonestly
+[ RUN      ] Test04_PathTraversalAndRootConfinement
+[       OK ] Test04_PathTraversalAndRootConfinement
+[ RUN      ] Test05_MissingMalformedAndSchemaErrors
+[       OK ] Test05_MissingMalformedAndSchemaErrors
+[ RUN      ] Test06_SemanticAndRoleMappingInvariants
+[       OK ] Test06_SemanticAndRoleMappingInvariants
+[ RUN      ] Test07_BrokenCrossDatasetReferences
+[       OK ] Test07_BrokenCrossDatasetReferences
+[ RUN      ] Test08_NonSilverstoneEventAndSnapshotReuse
+[       OK ] Test08_NonSilverstoneEventAndSnapshotReuse
+[ RUN      ] Test09_EngineReportedDiscrepancyFeedback
+[       OK ] Test09_EngineReportedDiscrepancyFeedback
+====================================================================
+Tests run: 9, Failures: 0
+====================================================================
+<end of output>
+Test time =   0.76 sec
+----------------------------------------------------------
+Test Passed.
+"f1_sim_dal_tests" end time: Oct 22 18:02 India Standard Time
+"f1_sim_dal_tests" time elapsed: 00:00:00
+----------------------------------------------------------
+
+2/2 Testing: f1_sim_simulation_tests
+2/2 Test: f1_sim_simulation_tests
+Command: "C:/Users/cauch/proj/F1_Sim/build-ucrt64/f1_sim_simulation_tests.exe" "C:/Users/cauch/proj/F1_Sim/data"
+Directory: C:/Users/cauch/proj/F1_Sim/build-ucrt64
+"f1_sim_simulation_tests" start time: Oct 22 18:02 India Standard Time
+Output:
+----------------------------------------------------------
+====================================================================
+F1 Simulator — Race Simulation Engine Verification Suite
+Configured data_root: C:/Users/cauch/proj/F1_Sim/data
+====================================================================
+[ RUN      ] Test01_StrategyValidation
+[       OK ] Test01_StrategyValidation
+[ RUN      ] Test02_InventoryAgeHealthAndReset
+[       OK ] Test02_InventoryAgeHealthAndReset
+[ RUN      ] Test03_StrictHealthThresholdsAndStopTiming
+[       OK ] Test03_StrictHealthThresholdsAndStopTiming
+[ RUN      ] Test04_PreplannedModeAndShortfallCascade
+[       OK ] Test04_PreplannedModeAndShortfallCascade
+[ RUN      ] Test05_InteractiveModeDecisionsAndMandatoryPrecedence
+[       OK ] Test05_InteractiveModeDecisionsAndMandatoryPrecedence
+[ RUN      ] Test06_LifecyclePauseResumeAndSnapshotDeterminism
+[       OK ] Test06_LifecyclePauseResumeAndSnapshotDeterminism
+[ RUN      ] Test07_DALIntegrationAndCapabilityGating
+[       OK ] Test07_DALIntegrationAndCapabilityGating
+[ RUN      ] Test08_MathematicalConformanceAndSyntheticExamples
+[       OK ] Test08_MathematicalConformanceAndSyntheticExamples
+====================================================================
+Tests run: 8, Failures: 0
+====================================================================
+<end of output>
+Test time =   0.55 sec
+----------------------------------------------------------
+Test Passed.
+"f1_sim_simulation_tests" end time: Oct 22 18:02 India Standard Time
+"f1_sim_simulation_tests" time elapsed: 00:00:00
+----------------------------------------------------------
+
+End testing: Oct 22 18:02 India Standard Time

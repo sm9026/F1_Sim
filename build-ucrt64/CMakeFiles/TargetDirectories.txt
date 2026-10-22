@@ -1,0 +1,8 @@
+C:/Users/cauch/proj/F1_Sim/build-ucrt64/CMakeFiles/f1_sim_dal.dir
+C:/Users/cauch/proj/F1_Sim/build-ucrt64/CMakeFiles/f1_sim_engine.dir
+C:/Users/cauch/proj/F1_Sim/build-ucrt64/CMakeFiles/f1_sim.dir
+C:/Users/cauch/proj/F1_Sim/build-ucrt64/CMakeFiles/f1_sim_dal_tests.dir
+C:/Users/cauch/proj/F1_Sim/build-ucrt64/CMakeFiles/f1_sim_simulation_tests.dir
+C:/Users/cauch/proj/F1_Sim/build-ucrt64/CMakeFiles/test.dir
+C:/Users/cauch/proj/F1_Sim/build-ucrt64/CMakeFiles/edit_cache.dir
+C:/Users/cauch/proj/F1_Sim/build-ucrt64/CMakeFiles/rebuild_cache.dir
